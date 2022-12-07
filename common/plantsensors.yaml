@@ -40,5 +40,8 @@ sensor:
     device_class: 'illuminance'
     state_class: 'measurement'
     setup_priority: -300
-    accuracy_decimals: 2
     update_interval: ${update_interval}
+    # convert to illuminance
+    filters:
+      - lambda: |-
+          return (x / 10000.0) * 2000000.0;
