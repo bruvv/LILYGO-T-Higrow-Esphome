@@ -2,6 +2,10 @@
 
 ESPHome firmware for a Lilygo T-Higrow wifi plant sensor
 
+![LILYGO-T-Higrow-ESP32-Soil-Tester-DHT11-BEM280-Garden-Flowers-Temperature-Moisture-Sensor-WiFi-Bluetooth-Wireless jpg_Q90](https://user-images.githubusercontent.com/3063928/206154094-ab7eba28-10b1-4b91-85e5-5729495d6a8d.jpg)
+
+![183286657-824a0e7f-a140-4d8e-8d6a-387070419dfd](https://user-images.githubusercontent.com/3063928/206154221-49a0d3ce-1850-4154-9039-1633d4962cd5.png)
+
 # Installation
 
 You can use the buttons below to install the pre-built firmware directly to your device via USB from your web browser.
