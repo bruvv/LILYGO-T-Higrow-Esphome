@@ -24,4 +24,4 @@ To enable the flower-card in home-assistant:
 
 <esp-web-install-button manifest="./air-quality-monitor-t-display-manifest.json"></esp-web-install-button>
 
-<script type="module" src="https://unpkg.com/esp-web-tools@8.0.3/dist/web/install-button.js?module"></script>
+<script type="module" src="https://unpkg.com/esp-web-tools@9.0.5/dist/web/install-button.js?module"></script>
