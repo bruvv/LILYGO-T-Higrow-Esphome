@@ -18,17 +18,7 @@ This `ESPHome <https://esphome.io/>`_ configuration builds firmware for the LILY
 - Temperature
 - Humidity
 
-You can build an example implementation on a perfboard in a project box like this:
-
-.. image:: static/air-quality-monitor-on-perfboard.jpg
-   :alt: A DIY air quality monitor on a perfboard in a project box
-
-Or a portable version with battery (with deep sleep works only for 12 hours)
-
-.. image:: static/air-quality-monitor-with-display.jpg
-   :alt: A DIY air quality monitor with display and battery
-
-And intergrate it into home-assistant
+With a beatiful dashboard card:
 
 .. image:: https://user-images.githubusercontent.com/203184/183286657-824a0e7f-a140-4d8e-8d6a-387070419dfd.png
    :alt: Plantflower card
