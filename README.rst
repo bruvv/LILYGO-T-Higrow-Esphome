@@ -96,17 +96,17 @@ After this, flash the firmware to your device, e.g. with:
 After you have added your device to Home Assistant's ESPHome integration, the air quality measurements are available in Home Assistant.
 
 To enable the flower-card in home-assistant:
-1. Get - `OpenPlantBook API <https://open.plantbook.io/>`_
-2. Install `HACS <https://hacs.xyz/docs/setup/download/>`_
-3. Install `Homeassistant Plantbook intergration <https://github.com/Olen/homeassistant-plant>`_
-4. Install `Homeassistant Plantbook api intergration <https://github.com/Olen/home-assistant-openplantbook>`_
-5. Install `Homeassistant Flower card <https://github.com/Olen/lovelace-flower-card/tree/new_plant>`_
+  1. Get - `OpenPlantBook API <https://open.plantbook.io/>`_
+  2. Install `HACS <https://hacs.xyz/docs/setup/download/>`_
+  3. Install `Homeassistant Plantbook intergration <https://github.com/Olen/homeassistant-plant>`_
+  4. Install `Homeassistant Plantbook api intergration <https://github.com/Olen/home-assistant-openplantbook>`_
+  5. Install `Homeassistant Flower card <https://github.com/Olen/lovelace-flower-card/tree/new_plant>`_
 
 **********************
 Web-based installation
 **********************
 
-If you have built one of the above three example configurations with exactly the same pinout and the same ESP32/ESP8266 modules, you can install the latest version of the firmware on your air quality monitor from our `installation page <https://bruvv.github.io/LILYGO-T-Higrow-ESP32/>`_ via USB, as well as setting up Wi-Fi and adding the device to Home Assistant. This requires a web browser that supports `Web Serial <https://caniuse.com/web-serial>`_ (which is a recent Chrome, Edge or Opera).
+If you have built an example configurations, you can install the latest version of the firmware on your LILYGO-T-Higrow wifi plant sensor from the `installation page <https://bruvv.github.io/LILYGO-T-Higrow-ESP32>`_ via USB, as well as setting up Wi-Fi and adding the device to Home Assistant. This requires a web browser that supports `Web Serial <https://caniuse.com/web-serial>`_ (which is a recent Chrome, Edge or Opera).
 
 **************
 Customizations
