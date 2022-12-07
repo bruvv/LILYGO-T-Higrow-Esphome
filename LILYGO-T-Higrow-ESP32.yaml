@@ -1,5 +1,5 @@
 substitutions:
-  devicename: 'lilygo-higrow-plant-sensor'
+  devicename: 'lilygo_higrow_plant_sensor' # Dashes are not supported in IDs
   device_description: 'Keep my plants safe and lively'
   project_version: '1.0'
   update_interval: 120s
