@@ -1,9 +1,11 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "automerge": true,
-    "extends": ["config:base"],
-    "assigneesFromCodeOwners": true,
-    "ignoreDeps": [],
-    "timezone": "Europe/Amsterdam",
-    "includeForks": true
-  }
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"automerge": true,
+	"automergeType": "pr",
+	"platformAutomerge": true,
+	"extends": ["config:base"],
+	"assigneesFromCodeOwners": true,
+	"ignoreDeps": [],
+	"timezone": "Europe/Amsterdam",
+	"includeForks": true
+}

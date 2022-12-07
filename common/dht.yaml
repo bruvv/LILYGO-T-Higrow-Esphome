@@ -10,6 +10,8 @@ sensor:
       device_class: 'temperature'
       state_class: 'measurement'
       accuracy_decimals: 1
+      # filters: # uncomment after calibration
+      #   - offset: -2.3 # offset in °C for the measured temperature
     humidity:
       name: '${devicename} DHT Humidity'
       unit_of_measurement: '%'
@@ -17,5 +19,7 @@ sensor:
       device_class: 'humidity'
       state_class: 'measurement'
       accuracy_decimals: 1
+      # filters: # uncomment after calibration
+      #   - offset: -2.3 # offset in °C for the measured temperature
     setup_priority: -100
     update_interval: ${update_interval}
