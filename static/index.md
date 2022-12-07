@@ -6,7 +6,7 @@ ESPHome firmware for a Lilygo T-Higrow wifi plant sensor
 
 ![183286657-824a0e7f-a140-4d8e-8d6a-387070419dfd](https://user-images.githubusercontent.com/3063928/206154221-49a0d3ce-1850-4154-9039-1633d4962cd5.png)
 
-# Installation
+# How to install esphome to the lilygo T-HiGrow wifi plant sensor
 
 You can use the blue button "connect" below to install the pre-built firmware directly to your device via USB from your web browser.
 
@@ -24,7 +24,7 @@ To enable the flower-card in home-assistant:
 4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
 5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
-# How to calibrate
+# How to calibrate the lilygo T-HiGrow wifi plant sensor
 
 First make sure you can flash your current sensor, otherwise you cannot continu.
 Start with opening the `plantsensors.yaml` file to change some settings.
@@ -59,7 +59,7 @@ After you did this, it is time to generate the configuration again, for this you
 
 This will compile and flash the file. While it is compiling get some glass with water. After you have flashed the file you will see a log output. This is great! We need it for the measurements. Make sure to clean the sensor and make sure it is totally dry as we need a dry measurement first.
 
-IMAGE
+![IMG_20221207_154457](https://user-images.githubusercontent.com/3063928/206223822-7d18fa3e-08d3-46d3-9e20-9d20245d3f73.jpg)
 
 After drying the sensor look in the log file for the measurements, look for the following 2 lines:
 
@@ -100,7 +100,7 @@ this is means, `2.82` and `0.075` are the measurements when it is actually 0. We
 
 Now we have to change the max reading of the sensor, this means it is water time! Put the sensor in the water up till the white line. So make very sure not to put it in to much!
 
-IMAGE
+![IMG_20221207_162203](https://user-images.githubusercontent.com/3063928/206223859-1298feb0-ba4f-43c8-bac1-8a1610380c3b.jpg)
 
 So we now look for the higher numbers when it is (half) submerged, again look in the log files and note the voltage readings as previously explained:
 
