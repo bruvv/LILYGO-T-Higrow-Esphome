@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  publish-esp8266:
+  publish:
     name: Publish firmware
     uses: esphome/workflows/.github/workflows/publish.yml@main
     with:
