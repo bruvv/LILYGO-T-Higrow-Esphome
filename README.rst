@@ -102,4 +102,4 @@ If you have built an example configurations, you can install the latest version 
 Customizations
 **************
 
-If you successfully created a customization, please contribute this with a `pull request`_, ideally with an example configuration.
+If you successfully created a customization, please contribute this with a `pull request`, ideally with an example configuration.
