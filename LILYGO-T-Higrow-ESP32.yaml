@@ -91,7 +91,7 @@ sensor:
     update_interval: ${update_interval}
 
 packages:
-  text_sensor: !include common/text_sensor.yaml
+  text_sensors: !include common/text_sensors.yaml
   dht: !include common/dht.yaml
   plantsensors: !include common/plantsensors.yaml
   waterpump: !include common/waterpump.yaml
