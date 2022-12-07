@@ -1,0 +1,5 @@
+switch:
+  - platform: gpio
+    pin: GPIO19
+    name: 'Water Pump'
+    id: water

@@ -1,0 +1,16 @@
+name: Build and Publish ESPHome firmware and website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-esp8266:
+    name: Publish firmware
+    uses: esphome/workflows/.github/workflows/publish.yml@main
+    with:
+      files: LILYGO-T-Higrow-ESP32.yaml
+      name: ESPHome Plant monitor
+      manifest_filename: lilygo-t-higrow-manifest.json
+      clean: false

@@ -1,0 +1,20 @@
+---
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Building ${{ matrix.file }}
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        file:
+          - LILYGO-T-Higrow-ESP32.yaml
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Build ESPHome firmware to verify configuration
+        uses: esphome/build-action@v1.5.0
+        with:
+          yaml_file: ${{ matrix.file }}

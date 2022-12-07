@@ -1,0 +1,8 @@
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 500ms # default 320ms
+    window: 500ms # default 30ms
+    active: true
+
+bluetooth_proxy:
+  active: true

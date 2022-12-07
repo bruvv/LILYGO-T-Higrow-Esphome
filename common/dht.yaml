@@ -1,0 +1,21 @@
+sensor:
+  # DHT
+  - platform: dht
+    pin: 16
+    model: dht11
+    temperature:
+      name: '${devicename} DHT Temperature'
+      unit_of_measurement: '°C'
+      icon: 'mdi:thermometer'
+      device_class: 'temperature'
+      state_class: 'measurement'
+      accuracy_decimals: 1
+    humidity:
+      name: '${devicename} DHT Humidity'
+      unit_of_measurement: '%'
+      icon: 'mdi:cloud-percent'
+      device_class: 'humidity'
+      state_class: 'measurement'
+      accuracy_decimals: 1
+    setup_priority: -100
+    update_interval: ${update_interval}

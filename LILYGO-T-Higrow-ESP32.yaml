@@ -1,0 +1,100 @@
+substitutions:
+  devicename: 'lilygo-higrow-plant-sensor'
+  device_description: 'Keep my plants safe and lively'
+  project_version: '1.0'
+  update_interval: 120s
+  loglevel: DEBUG
+  # Uncomment this if you want to use deepsleep
+  # run_duration: 11s # set how long to stay awake - NOT less then 10sec
+  # sleep_duration: 60min # set how long to sleep in minutes
+
+esphome:
+  name: '${devicename}'
+  comment: '${device_description}'
+  on_boot:
+    priority: 240
+    then:
+      - wait_until:
+          condition:
+            wifi.connected:
+          timeout: 10s
+  on_shutdown:
+    then:
+      - switch.turn_off: spower
+
+dashboard_import:
+  package_import_url: github://bruvv/LILYGO-T-Higrow-ESP32/LILYGO-T-Higrow-ESP32.yaml@main
+
+esp32:
+  board: lolin_d32
+
+improv_serial:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: True
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: '${devicename}'
+
+captive_portal:
+
+# Web server disabled because it was using to much ram
+# web_server:
+# port: 80
+
+# Enable logging
+logger:
+  level: '${loglevel}'
+
+api:
+
+ota:
+  safe_mode: true
+  reboot_timeout: 10min
+  num_attempts: 5
+
+time:
+  - platform: homeassistant
+
+button:
+  - platform: restart
+    name: 'Restart - ${devicename}'
+
+i2c:
+  sda: 25
+  scl: 26
+  scan: True
+  id: bus_a
+  setup_priority: -200
+
+switch:
+  # Power Switch
+  - platform: gpio
+    name: '${devicename} Sensor Power switch'
+    pin:
+      number: 4
+      mode: INPUT_PULLUP
+    id: spower
+    restore_mode: ALWAYS_ON
+    internal: true
+    setup_priority: 1000
+
+sensor:
+  # Wifi sensor
+  - platform: wifi_signal
+    name: '${devicename} WiFi Signal'
+    id: '${devicename}_wifi_signal'
+    update_interval: ${update_interval}
+
+packages:
+  text_sensor: !include common/text_sensor.yaml
+  dht: !include common/dht.yaml
+  plantsensors: !include common/plantsensors.yaml
+  waterpump: !include common/waterpump.yaml
+  aqi: !include common/bluetooth.yaml
+  # bme280.yaml: !unclude common/bme280.yaml
+  # deepsleep: !include common/deepsleep.yaml
+  # battery: !include common/battery.yaml # only works for 12 hours and enable deepsleep!

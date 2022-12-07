@@ -1,0 +1,20 @@
+# Sensors for ESP version and WIFI information
+text_sensor:
+  # Installed version
+  - platform: template
+    name: '${devicename} - Installed version'
+    icon: 'mdi:label-outline'
+    entity_category: diagnostic
+    lambda: |-
+      return {"${project_version}"};
+    update_interval: 6h
+  - platform: version
+    hide_timestamp: true
+    name: '${devicename} - ESPHome Version'
+  - platform: wifi_info
+    ip_address:
+      name: '${devicename} - IP Address'
+      icon: mdi:wifi
+    ssid:
+      name: '${devicename} - Connected SSID'
+      icon: mdi:wifi-strength-2

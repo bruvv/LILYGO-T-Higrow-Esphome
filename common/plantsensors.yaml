@@ -1,0 +1,44 @@
+sensor:
+  # Soil humidity %
+  - platform: adc
+    pin: GPIO32
+    name: '${devicename} Soil Moisture'
+    icon: 'mdi:watering-can'
+    update_interval: ${update_interval}
+    attenuation: 11db
+    accuracy_decimals: 2
+    unit_of_measurement: '%'
+    # unit_of_measurement: "V" # uncomment for raw data
+    filters: # comment for raw data
+      - calibrate_linear:
+          # Map 0.0 (from sensor) to 0.0 (true value)
+          - 2.82 -> 0.0
+          - 1.39 -> 100.0
+
+  # Fertilizer sensor
+  - platform: adc
+    pin: GPIO34
+    name: '${devicename} Soil Conductivity'
+    icon: 'mdi:flower'
+    update_interval: ${update_interval}
+    accuracy_decimals: 2
+    unit_of_measurement: 'µS/cm'
+    # unit_of_measurement: "V" # uncomment for raw data
+    filters: # comment for raw data
+      - calibrate_linear:
+          # Map 0.0 (from sensor) to 0.0 (true value)
+          - 0.075 -> 0.0
+          - 0.25 -> 100.0
+
+  # Lux sensor
+  - platform: bh1750
+    i2c_id: bus_a
+    name: '${devicename} BH1750 Illuminance'
+    address: 0x23
+    unit_of_measurement: 'lx'
+    icon: 'mdi:white-balance-sunny'
+    device_class: 'illuminance'
+    state_class: 'measurement'
+    setup_priority: -300
+    accuracy_decimals: 2
+    update_interval: ${update_interval}

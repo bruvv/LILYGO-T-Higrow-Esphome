@@ -1,0 +1,18 @@
+deep_sleep:
+  id: deep_sleep_control
+  run_duration: ${run_duration}
+  sleep_duration: ${sleep_duration}
+  wakeup_pin:
+    number: 35
+    inverted: true
+    mode:
+      input: true
+      # pullup: true
+
+# Wake Button
+binary_sensor:
+  - platform: gpio
+    name: '${devicename} Wake Button'
+    pin: 35
+    internal: true
+    setup_priority: 1000
