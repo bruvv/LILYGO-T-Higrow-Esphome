@@ -105,8 +105,8 @@ Now we have to change the max reading of the sensor, this means it is water time
 So we now look for the higher numbers when it is (half) submerged, again look in the log files and note the voltage readings as previously explained:
 
 ```
-[16:22:22][D][sensor:127]: 'plantsensor1 Soil Conductivity': Sending state 0.24400 V with 2 decimals of accuracy
-[16:22:25][D][sensor:127]: 'plantsensor1 Soil Moisture': Sending state 1.37300 V with 2 decimals of accuracy
+[16:22:22][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Conductivity': Sending state 0.24400 V with 2 decimals of accuracy
+[16:22:25][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Moisture': Sending state 1.37300 V with 2 decimals of accuracy
 ```
 
 So we write them down in the `plantsensors.yaml` again but now the higher numbers:
