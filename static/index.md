@@ -8,9 +8,13 @@ ESPHome firmware for a Lilygo T-Higrow wifi plant sensor
 
 # Installation
 
-You can use the buttons below to install the pre-built firmware directly to your device via USB from your web browser.
+You can use the blue button "connect" below to install the pre-built firmware directly to your device via USB from your web browser.
 
 Afterwards you can set up Wi-Fi and add your device to Home Assistant from this same web page. Make sure that it is on the same network as home-assistant is and it will connect automatically with the api of the plantsensor.
+
+<esp-web-install-button manifest="./air-quality-monitor-t-display-manifest.json"></esp-web-install-button>
+
+<script type="module" src="https://unpkg.com/esp-web-tools@9.0.5/dist/web/install-button.js?module"></script>
 
 To enable the flower-card in home-assistant:
 
@@ -20,8 +24,6 @@ To enable the flower-card in home-assistant:
 4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
 5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
-## LilyGO T-Higrow wifi plant sensor
+# How to calibrate
 
-<esp-web-install-button manifest="./air-quality-monitor-t-display-manifest.json"></esp-web-install-button>
-
-<script type="module" src="https://unpkg.com/esp-web-tools@9.0.5/dist/web/install-button.js?module"></script>
+TBD
