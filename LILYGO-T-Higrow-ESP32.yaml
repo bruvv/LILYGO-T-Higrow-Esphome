@@ -34,7 +34,7 @@ wifi:
   # Use improv (after installing either go to web.esphome.io or use the installer here: https://bruvv.github.io/LILYGO-T-Higrow-ESP32)
   # ssid: !secret wifi_ssid
   # password: !secret wifi_password
-  fast_connect: True
+  # fast_connect: True
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
