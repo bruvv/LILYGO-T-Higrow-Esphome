@@ -14,11 +14,11 @@ Afterwards you can set up Wi-Fi and add your device to Home Assistant from this 
 
 To enable the flower-card in home-assistant:
 
-1. Get - `OpenPlantBook API <https://open.plantbook.io/>`\_
-2. Install `HACS <https://hacs.xyz/docs/setup/download/>`\_
-3. Install `Homeassistant Plantbook intergration <https://github.com/Olen/homeassistant-plant>`\_
-4. Install `Homeassistant Plantbook api intergration <https://github.com/Olen/home-assistant-openplantbook>`\_
-5. Install `Homeassistant Flower card <https://github.com/Olen/lovelace-flower-card/tree/new_plant>`\_
+1. Get - [OpenPlantBook API](https://open.plantbook.io)
+2. Install [HACS](https://hacs.xyz/docs/setup/download)
+3. Install [Homeassistant Plantbook intergration](https://github.com/Olen/homeassistant-plant)
+4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
+5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
 ## LilyGO T-Higrow wifi plant sensor
 
