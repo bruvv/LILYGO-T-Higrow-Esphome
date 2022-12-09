@@ -1,6 +1,6 @@
 # About
 
-ESPHome firmware for a Lilygo T-Higrow wifi plant sensor
+ESPHome firmware for a LILYGO T-Higrow WIFI Plant Sensor
 
 ![LILYGO-T-Higrow-ESP32-Soil-Tester-DHT11-BEM280-Garden-Flowers-Temperature-Moisture-Sensor-WiFi-Bluetooth-Wireless jpg_Q90](https://user-images.githubusercontent.com/3063928/206154094-ab7eba28-10b1-4b91-85e5-5729495d6a8d.jpg)
 
@@ -141,3 +141,9 @@ After you writen down the correct numbers it is time to uncomment the commented 
 Reflash it again with the previous command: `esphome run LILYGO-T-Higrow-ESP32.yaml` and it is now calibrated!
 
 You can also calibrate the temperature and humidty sensors, please read the `dht.yaml` or `bme280.yaml` to set the correct offsets.
+
+[16:57:52][d][sensor:127]: 'plantsensor2 Soil Moisture': Sending state 2.83500 V with 2 decimals of accuracy
+[16:58:18][d][sensor:127]: 'plantsensor2 Soil Conductivity': Sending state 0.07500 V with 2 decimals of accuracy
+
+[17:00:52][d][sensor:127]: 'plantsensor2 Soil Moisture': Sending state 1.39600 V with 2 decimals of accuracy
+[17:00:48][d][sensor:127]: 'plantsensor2 Soil Conductivity': Sending state 0.24500 V with 2 decimals of accuracy
