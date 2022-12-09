@@ -17,7 +17,7 @@ climate:
     default_target_temperature_high: 70
 
     heat_action:
-      - switch.turn_on: ${devicename}_pumpe
+      - switch.turn_on: water
 
     idle_action:
-      - switch.turn_off: ${devicename}_pumpe
+      - switch.turn_off: water

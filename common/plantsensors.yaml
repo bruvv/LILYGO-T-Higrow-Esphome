@@ -3,6 +3,7 @@ sensor:
   - platform: adc
     pin: GPIO32
     name: '${devicename} Soil Moisture'
+    id: ${devicename}_moisture
     icon: 'mdi:watering-can'
     update_interval: ${update_interval}
     attenuation: 11db
