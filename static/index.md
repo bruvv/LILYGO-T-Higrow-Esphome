@@ -31,7 +31,7 @@ Start with opening the `plantsensors.yaml` file to change some settings.
 
 Find the following comments:
 
-` # comment when calibrating`
+`# comment when calibrating`
 
 Place a comment infront of that line. For example:
 
