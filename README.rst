@@ -73,11 +73,14 @@ To use this configuration, create a YAML file with:
 - substitutions for all pin numbers used by the components, your device's name, platform and board and parameters like update intervals.
 - packages that include the relevant YAML files in the ``common`` directory.
 
-There are three example configurations in this repository:
 
+<<<<<<< HEAD
 - `LILYGO-T-Higrow-ESP32.yaml <https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml>`_ for the NodeMCU v2 ESP8266 with MH-Z19B
 
 After this, flash the firmware to your device, e.g. with:
+=======
+Flash the firmware to your device, e.g. with:
+>>>>>>> 27ab5efebacbb645e524a4b8f999126d30bb326a
 
 .. code-block:: console
 
