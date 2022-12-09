@@ -18,6 +18,9 @@ text_sensor:
     ssid:
       name: '${devicename} - Connected SSID'
       icon: mdi:wifi-strength-2
+
+sensor:
   - platform: wifi_signal
     name: '${devicename} - WiFi Signal'
     update_interval: $update_interval
+    icon: mdi:wifi-strength-1
