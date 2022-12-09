@@ -6,7 +6,7 @@ on: [push, pull_request]
 jobs:
   build:
     name: Building ${{ matrix.file }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         file:
@@ -19,7 +19,6 @@ jobs:
         with:
           yaml_file: ${{ matrix.file }}
   publish:
-    if: ${{ github.ref == 'main' }}
     needs: build
     name: Publish firmware
     uses: esphome/workflows/.github/workflows/publish.yml@main
