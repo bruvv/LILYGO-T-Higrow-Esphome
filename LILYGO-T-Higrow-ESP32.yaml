@@ -4,6 +4,10 @@ substitutions:
   project_version: '1.0'
   update_interval: 120s
   loglevel: DEBUG
+  moisture_min: '2.82'
+  moisture_max: '1.39'
+  conductivity_min: '0.075'
+  conductivity_max: '0.25'
   # Uncomment this if you want to use deepsleep
   # run_duration: 11s # set how long to stay awake - NOT less then 10sec
   # sleep_duration: 60min # set how long to sleep in minutes
