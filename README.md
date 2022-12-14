@@ -32,15 +32,11 @@ Optionally:
 
 # How to install (easy)
 
-If you have built an example configurations, you can install the latest version of the firmware on your LILYGO-T-Higrow wifi plant sensor from the [installation page](https://bruvv.github.io/LILYGO-T-Higrow-Esphome) via USB, as well as setting up Wi-Fi and adding the device to Home Assistant. This requires a web browser that supports [WebSerial](https://caniuse.com/web-serial) (which is a recent Chrome, Edgeor Opera).
+This project automates the building process. So all you need to do is open Chrome, Edge or Opera and go to the [installation page](https://bruvv.github.io/LILYGO-T-Higrow-Esphome). Connect the ESP32 to your computer via USB and read the instructions on that page.
 
 # How to install (expert)
 
-To use this configuration, create a YAML file with:
-
-- substitutions for all pin numbers used by the components, your devices name, platform and board and parameters like update intervals.
-- packages that include the relevant YAML files in the `common` directory.
-- [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) for the NodeMCU v2 ESP8266 with MH-Z19B
+To use this configuration, adjust the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) and changes the `Subsitions`. If you want to adjust specific settings or do a [calbiration](https://bruvv.github.io/LILYGO-T-Higrow-Esphome/#how-to-calibrate-the-lilygo-t-higrow-wifi-plant-sensor), the relevant YAML files are in the `common` directory.
 
 After this, flash the firmware to your device, e.g. with:
 
@@ -48,7 +44,7 @@ After this, flash the firmware to your device, e.g. with:
 esphome run LILYGO-T-Higrow-ESP32.yaml
 ```
 
-After you have added your device to Home Assistant ESPHome Integration, the air quality measurements are available in Home Assistant.
+After you have added your device to Home Assistant ESPHome Integration, the sensors are available in Home Assistant.
 
 To enable the flower-card in home-assistant:
 
@@ -66,11 +62,11 @@ You can find these in the directory [common](https://github.com/bruvv/LILYGO-T-H
 
 [battery.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/battery.yaml)
 
-If you bought a battery and hooked it up to the esp then you will need to enable this. The default battery will run for 12 hours with deep sleep enabled.
+If you bought a battery and hooked it up to the esp then you will need to enable this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml). The default battery will run for 12 hours with deep sleep enabled.
 
 [bluetooth.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/bluetooth.yaml)
 
-This will enable bluetooth (proxy) so you can have the bluetooth functionality enabled
+This will enable bluetooth (proxy) so you can have the bluetooth functionality enabled. Disable when using battery.
 
 [bme280.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/bme280.yaml)
 
@@ -78,7 +74,7 @@ If you bought the bme280 sensor option please enable this.
 
 [Deepsleep.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/deepsleep.yaml)
 
-If you want to run the battery it is wise to enable this so it will sleep.
+If you want to run the battery it is wise to enable this so it will sleep. You can do this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml)
 
 [dht.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/dht.yaml)
 
@@ -94,7 +90,7 @@ When you want to enable the inbuild text_sensors enable this, it will output use
 
 [waterpump.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/waterpump.yaml)
 
-If you bought the optional Waterpump please enable this.
+If you bought the optional Waterpump please enable this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml)
 
 # Customizations
 
