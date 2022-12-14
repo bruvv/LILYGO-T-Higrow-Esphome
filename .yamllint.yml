@@ -1,7 +1,0 @@
----
-extends: default
-
-ignore: |
-  build/
-rules:
-  document-start: disable

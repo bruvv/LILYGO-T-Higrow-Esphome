@@ -26,14 +26,14 @@ To enable the flower-card in home-assistant:
 
 # How to calibrate the lilygo T-HiGrow wifi plant sensor
 
-First make sure you can flash your current sensor, otherwise you cannot continu.
+First make sure you can flash your current sensor, otherwise you cannot continue.
 Start with opening the `plantsensors.yaml` file to change some settings.
 
 Find the following comments:
 
 `# comment when calibrating`
 
-Place a comment infront of that line. For example:
+Place a comment in front of that line. For example:
 
 `unit_of_measurement: '%' # comment for calibration`
 
@@ -57,7 +57,7 @@ After you did this, it is time to generate the configuration again, for this you
 
 `esphome run LILYGO-T-Higrow-ESP32.yaml`
 
-This will compile and flash the file. While it is compiling get some glass with water. After you have flashed the file you will see a log output. This is great! We need it for the measurements. Make sure to clean the sensor and make sure it is totally dry as we need a dry measurement first.
+This will compile and flash the file. While it is compiling, get some glass with water. After you have flashed the file you will see a log output. This is great! We need it for the measurements. Make sure to clean the sensor and make sure it is totally dry as we need a dry measurement first.
 
 ![IMG_20221207_154457](https://user-images.githubusercontent.com/3063928/206223822-7d18fa3e-08d3-46d3-9e20-9d20245d3f73.jpg)
 
@@ -70,35 +70,22 @@ After drying the sensor look in the log file for the measurements, look for the 
 
 Note the: `0.07500 V` and `2.83500 V`
 
-Now let the sensor run for at least 10 minutes and let nothing touch it!
+Now let the sensor run for at least 10 minutes and leave it untouched!
 
-So after 10 minutes the measurment for Conductivity stayed: `0.07500 V` and Moisture stayed: `2.83500 V` we can write that in our yaml!
+After 10 minutes check the measurements again. In my case: conductivity stayed: `0.07500 V` and moisture stayed: `2.83500 V` we can write that in our yaml.
 
-Open `plantsensors.yaml` again and find the following:
+Open `LILYGO-T-Higrow-ESP32.yaml` and find the following:
 
-```
-    # filters: # comment when calibrating
-      # - calibrate_linear: # comment when calibrating
-          # Map 0.0 (from sensor) to 0.0 (true value)
-          # - 0.075 -> 0.0 # comment when calibrating
-          # - 0.25 -> 100.0 # comment when calibrating
-```
-
-We are looking for these lines:
-
-```
-Moisture:
-# - 2.82 -> 0.0 # comment when calibrating
-
-Conductivity:
-# - 0.075 -> 0.0 # comment when calibrating
+```yaml
+moisture_min: "2.82"
+moisture_max: "1.39"
+conductivity_min: "0.075"
+conductivity_max: "0.25"
 ```
 
-this is means, `2.82` and `0.075` are the measurements when it is actually 0. We adjust this to what we found during our calibration. So for our Moisture we adjust it to:
+This means, `2.82` and `0.075` are the minimum values that we measuret when it is actually 0%. We adjust this to what we found during our calibration.
 
-`# - 2.835 -> 0.0 # comment when calibrating`
-
-Now we have to change the max reading of the sensor, this means it is water time! Put the sensor in the water up till the white line. So make very sure not to put it in to much!
+Now we have to change the max reading of the sensor, this means it is water time! Put the sensor in the water up till the white line. So make very sure not to put it in too much!
 
 ![IMG_20221207_162203](https://user-images.githubusercontent.com/3063928/206223859-1298feb0-ba4f-43c8-bac1-8a1610380c3b.jpg)
 
@@ -109,17 +96,9 @@ So we now look for the higher numbers when it is (half) submerged, again look in
 [16:22:25][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Moisture': Sending state 1.37300 V with 2 decimals of accuracy
 ```
 
-So we write them down in the `plantsensors.yaml` again but now the higher numbers:
+So we write them down in the `LILYGO-T-Higrow-ESP32.yaml` again but now the higher numbers.
 
-```
-Moisture:
-# - 1.373 -> 100.0 # comment when calibrating
-
-Conductivity:
-# - 0.244 -> 100.0 # comment when calibrating
-```
-
-After you writen down the correct numbers it is time to uncomment the commented section for example:
+After you written down the correct numbers it is time to uncomment the commented section again, for example:
 
 ```
   # Fertilizer sensor
@@ -134,13 +113,13 @@ After you writen down the correct numbers it is time to uncomment the commented 
     filters: # comment when calibrating
       - calibrate_linear: # comment when calibrating
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - 0.075 -> 0.0 # comment when calibrating
-          - 0.244 -> 100.0 # comment when calibrating
+          - ${conductivity_min} -> 0.0 # comment when calibrating
+          - ${conductivity_max} -> 100.0 # comment when calibrating
 ```
 
 Reflash it again with the previous command: `esphome run LILYGO-T-Higrow-ESP32.yaml` and it is now calibrated!
 
-You can also calibrate the temperature and humidty sensors, please read the `dht.yaml` or `bme280.yaml` to set the correct offsets.
+You can also calibrate the temperature and humidity sensors, please read the `dht.yaml` or `bme280.yaml` to set the correct offsets.
 
 [16:57:52][d][sensor:127]: 'plantsensor2 Soil Moisture': Sending state 2.83500 V with 2 decimals of accuracy
 [16:58:18][d][sensor:127]: 'plantsensor2 Soil Conductivity': Sending state 0.07500 V with 2 decimals of accuracy
