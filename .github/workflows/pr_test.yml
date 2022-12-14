@@ -1,7 +1,7 @@
 ---
-name: Build and publish
+name: Build
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -18,12 +18,3 @@ jobs:
         uses: esphome/build-action@v1.5.2
         with:
           yaml_file: ${{ matrix.file }}
-  publish:
-    needs: build
-    name: Publish firmware
-    uses: esphome/workflows/.github/workflows/publish.yml@main
-    with:
-      files: LILYGO-T-Higrow-ESP32.yaml
-      name: ESPHome Plant monitor
-      manifest_filename: lilygo-t-higrow-manifest.json
-      clean: false
