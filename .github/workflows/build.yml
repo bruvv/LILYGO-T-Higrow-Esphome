@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@v3
       - name: Build ESPHome firmware to verify configuration
         uses: esphome/build-action@v1.5.2
         with:
