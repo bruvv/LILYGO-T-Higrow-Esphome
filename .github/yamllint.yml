@@ -9,3 +9,5 @@ rules:
     level: warning
   trailing-spaces:
     level: warning
+  comments:
+    min-spaces-from-content: 1
