@@ -2,7 +2,7 @@ substitutions:
   devicename: 'lilygo_higrow_plant_sensor' # Dashes are not supported in IDs
   device_description: 'Keep my plants safe and lively'
   project_version: '1.0'
-  update_interval: 120s
+  update_interval: 10min
   loglevel: DEBUG
   # Uncomment this if you want to use deepsleep
   # run_duration: 11s # set how long to stay awake - NOT less then 10sec
@@ -67,7 +67,7 @@ button:
 i2c:
   sda: 25
   scl: 26
-  scan: True
+  scan: true
   id: bus_a
   setup_priority: -200
 
@@ -96,6 +96,7 @@ packages:
   plantsensors: !include common/plantsensors.yaml
   waterpump: !include common/waterpump.yaml
   aqi: !include common/bluetooth.yaml
+  # Battery only works for 12 hours with deepsleep!
   # bme280.yaml: !unclude common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
-  # battery: !include common/battery.yaml # only works for 12 hours and enable deepsleep!
+  # battery: !include common/battery.yaml
