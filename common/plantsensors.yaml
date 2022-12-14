@@ -13,8 +13,8 @@ sensor:
     filters: # comment when calibrating
       - calibrate_linear: # comment when calibrating
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - 2.82 -> 0.0 # comment when calibrating
-          - 1.39 -> 100.0 # comment when calibrating
+          - ${moisture_min} -> 0.0 # comment when calibrating
+          - ${moisture_max} -> 100.0 # comment when calibrating
 
   # Fertilizer sensor
   - platform: adc
@@ -28,8 +28,8 @@ sensor:
     filters: # comment when calibrating
       - calibrate_linear: # comment when calibrating
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - 0.075 -> 0.0 # comment when calibrating
-          - 0.25 -> 100.0 # comment when calibrating
+          - ${conductivity_min} -> 0.0 # comment when calibrating
+          - ${conductivity_max} -> 100.0 # comment when calibrating
 
   # Lux sensor
   - platform: bh1750
@@ -45,4 +45,4 @@ sensor:
     # convert to illuminance
     filters:
       - lambda: |-
-          return (x / 10000.0) * 2000000.0;
+          return x * 200.0;
