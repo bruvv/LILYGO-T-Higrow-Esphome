@@ -1,3 +1,4 @@
+---
 sensor:
   - platform: bme280
     i2c_id: bus_a

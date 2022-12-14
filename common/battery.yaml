@@ -1,3 +1,4 @@
+---
 sensor:
   # Batterie volt
   - platform: adc

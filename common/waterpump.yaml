@@ -1,3 +1,4 @@
+---
 switch:
   - platform: gpio
     pin: GPIO19

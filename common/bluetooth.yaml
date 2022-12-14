@@ -1,3 +1,4 @@
+---
 esp32_ble_tracker:
   scan_parameters:
     interval: 500ms # default 320ms

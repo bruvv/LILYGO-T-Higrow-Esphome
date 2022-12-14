@@ -1,3 +1,4 @@
+---
 # Sensors for ESP version and WIFI information
 text_sensor:
   # Installed version

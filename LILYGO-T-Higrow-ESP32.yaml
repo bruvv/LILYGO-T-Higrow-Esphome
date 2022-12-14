@@ -1,5 +1,7 @@
+---
 substitutions:
-  devicename: 'lilygo_higrow_plant_sensor' # Dashes are not supported in IDs
+  # Dashes are not supported in devicename
+  devicename: 'lilygo_higrow_plant_sensor'
   device_description: 'Keep my plants safe and lively'
   project_version: '1.0'
   update_interval: 10min
@@ -8,9 +10,11 @@ substitutions:
   moisture_max: '1.39'
   conductivity_min: '0.075'
   conductivity_max: '0.25'
-  # Uncomment this if you want to use deepsleep
-  # run_duration: 11s # set how long to stay awake - NOT less then 10sec
-  # sleep_duration: 60min # set how long to sleep in minutes
+  # Uncomment run_duration and sleep_duration if you want to use deepsleep
+  # set how long to stay awake - NOT less then 10sec
+  # run_duration: 11s
+  # set how long to sleep in minutes
+  # sleep_duration: 60min
 
 esphome:
   name: '${devicename}'
