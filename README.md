@@ -30,6 +30,34 @@ Optionally:
 - [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
 - [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
+# How to install (easy)
+
+If you have built an example configurations, you can install the latest version of the firmware on your LILYGO-T-Higrow wifi plant sensor from the [installation page](https://bruvv.github.io/LILYGO-T-Higrow-Esphome) via USB, as well as setting up Wi-Fi and adding the device to Home Assistant. This requires a web browser that supports [WebSerial](https://caniuse.com/web-serial) (which is a recent Chrome, Edgeor Opera).
+
+# How to install (expert)
+
+To use this configuration, create a YAML file with:
+
+- substitutions for all pin numbers used by the components, your devices name, platform and board and parameters like update intervals.
+- packages that include the relevant YAML files in the `common` directory.
+- [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) for the NodeMCU v2 ESP8266 with MH-Z19B
+
+After this, flash the firmware to your device, e.g. with:
+
+```
+esphome run LILYGO-T-Higrow-ESP32.yaml
+```
+
+After you have added your device to Home Assistant ESPHome Integration, the air quality measurements are available in Home Assistant.
+
+To enable the flower-card in home-assistant:
+
+1. Get - [OpenPlantBook API](https://open.plantbook.io/)
+2. Install [HACS](https://hacs.xyz/docs/setup/download/)
+3. Install [Homeassistant Plantbook intergration](https://github.com/Olen/homeassistant-plant)
+4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
+5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
+
 # Modularity
 
 This is a modular ESPHome configuration split up in various YAML files that you can import as [packages](https://esphome.io/guides/configuration-types.html#packages).
@@ -67,34 +95,6 @@ When you want to enable the inbuild text_sensors enable this, it will output use
 [waterpump.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/waterpump.yaml)
 
 If you bought the optional Waterpump please enable this.
-
-# Usage
-
-To use this configuration, create a YAML file with:
-
-- substitutions for all pin numbers used by the components, your devices name, platform and board and parameters like update intervals.
-- packages that include the relevant YAML files in the `common` directory.
-- [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) for the NodeMCU v2 ESP8266 with MH-Z19B
-
-After this, flash the firmware to your device, e.g. with:
-
-```
-esphome run LILYGO-T-Higrow-ESP32.yaml
-```
-
-After you have added your device to Home Assistant ESPHome Integration, the air quality measurements are available in Home Assistant.
-
-To enable the flower-card in home-assistant:
-
-1. Get - [OpenPlantBook API](https://open.plantbook.io/)
-2. Install [HACS](https://hacs.xyz/docs/setup/download/)
-3. Install [Homeassistant Plantbook intergration](https://github.com/Olen/homeassistant-plant)
-4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
-5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
-
-# Web-based installation
-
-If you have built an example configurations, you can install the latest version of the firmware on your LILYGO-T-Higrow wifi plant sensor from the [installation page](https://bruvv.github.io/LILYGO-T-Higrow-Esphome) via USB, as well as setting up Wi-Fi and adding the device to Home Assistant. This requires a web browser that supports [WebSerial](https://caniuse.com/web-serial) (which is a recent Chrome, Edgeor Opera).
 
 # Customizations
 
