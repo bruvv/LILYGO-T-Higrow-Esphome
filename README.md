@@ -17,12 +17,14 @@ With a beatiful dashboard card:
 
 # Requirements
 
-- [Plant sensor itself](https://s.click.aliexpress.com/e/_DlYOcRZ)
+- [Plant sensor itself](https://s.click.aliexpress.com/e/_DefUZbV)
 - [ESPHome](https://esphome.io/)
 
 Optionally:
 
-- [Water pump](https://s.click.aliexpress.com/e/_DdaMnMB)
+- [Water pump](https://s.click.aliexpress.com/e/_DefUZbV)
+- [Long USB-C Cable](https://s.click.aliexpress.com/e/_DeOVOOP)
+- [Cheap USB charger](https://s.click.aliexpress.com/e/_DFwyyJh)
 - LiPo or Li-Ion battery
 - [HACS](https://hacs.xyz/docs/setup/download/)
 - [OpenPlantBook API](https://open.plantbook.io/)
