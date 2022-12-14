@@ -121,8 +121,10 @@ Reflash it again with the previous command: `esphome run LILYGO-T-Higrow-ESP32.y
 
 You can also calibrate the temperature and humidity sensors, please read the `dht.yaml` or `bme280.yaml` to set the correct offsets.
 
+```
 [16:57:52][d][sensor:127]: 'plantsensor2 Soil Moisture': Sending state 2.83500 V with 2 decimals of accuracy
 [16:58:18][d][sensor:127]: 'plantsensor2 Soil Conductivity': Sending state 0.07500 V with 2 decimals of accuracy
 
 [17:00:52][d][sensor:127]: 'plantsensor2 Soil Moisture': Sending state 1.39600 V with 2 decimals of accuracy
 [17:00:48][d][sensor:127]: 'plantsensor2 Soil Conductivity': Sending state 0.24500 V with 2 decimals of accuracy
+```
