@@ -7,5 +7,6 @@
 	"assigneesFromCodeOwners": true,
 	"ignoreDeps": [],
 	"timezone": "Europe/Amsterdam",
-	"includeForks": true
+	"includeForks": true,
+	"dependencyDashboard": false
 }
