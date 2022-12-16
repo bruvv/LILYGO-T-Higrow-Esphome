@@ -105,6 +105,6 @@ packages:
   waterpump: !include common/waterpump.yaml
   aqi: !include common/bluetooth.yaml
   # Battery only works for 12 hours with deepsleep!
-  # bme280.yaml: !unclude common/bme280.yaml
+  # bme280: !include common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
   # battery: !include common/battery.yaml
