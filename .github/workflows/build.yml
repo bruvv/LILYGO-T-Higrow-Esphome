@@ -7,6 +7,7 @@ jobs:
   build:
     name: Building ${{ matrix.file }}
     runs-on: ubuntu-latest
+    if: needs.pr-check.outputs.number != 'null'
     strategy:
       matrix:
         file:
