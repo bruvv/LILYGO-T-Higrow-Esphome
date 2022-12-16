@@ -17,3 +17,4 @@ sensor:
       #   - offset: -2.3 # offset in °C for the measured temperature
     address: 0x77
     update_interval: ${update_interval}
+    setup_priority: -300
