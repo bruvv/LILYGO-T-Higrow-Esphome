@@ -4,7 +4,7 @@ substitutions:
   devicename: 'lilygo_higrow_plant_sensor'
   device_description: 'Keep my plants safe and lively'
   project_version: '1.0'
-  update_interval: 10min
+  update_interval: 30min
   loglevel: DEBUG
   moisture_min: '2.82'
   moisture_max: '1.39'
@@ -103,7 +103,7 @@ packages:
   dht: !include common/dht.yaml
   plantsensors: !include common/plantsensors.yaml
   waterpump: !include common/waterpump.yaml
-  aqi: !include common/bluetooth.yaml
+  bluetooth: !include common/bluetooth.yaml
   # Battery only works for 12 hours with deepsleep!
   # bme280: !include common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
