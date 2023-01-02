@@ -13,7 +13,7 @@ climate:
       temperature_step: 1
 
     name: ${devicename} Regler
-    sensor: ${devicename}_moisture
+    sensor: ${devicename}_soil_moisture
     default_target_temperature_low: 20
     default_target_temperature_high: 70
 
