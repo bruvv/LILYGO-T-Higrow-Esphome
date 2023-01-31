@@ -10,6 +10,8 @@ sensor:
     attenuation: 11db
     accuracy_decimals: 2 # comment for calibration
     unit_of_measurement: '%' # comment for calibration
+    device_class: 'moisture'
+    state_class: 'measurement'
     # unit_of_measurement: "V" # uncomment for calibration
     filters: # comment when calibrating
       - calibrate_linear: # comment when calibrating
@@ -25,6 +27,8 @@ sensor:
     update_interval: ${update_interval}
     accuracy_decimals: 2 # comment for calibration
     unit_of_measurement: 'µS/cm' # comment when calibrating
+    # device_class: '' # for now home assistant does not support this class
+    state_class: 'measurement'
     # unit_of_measurement: "V" # uncomment for raw data
     filters: # comment when calibrating
       - calibrate_linear: # comment when calibrating
