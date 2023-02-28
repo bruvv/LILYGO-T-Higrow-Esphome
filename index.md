@@ -12,7 +12,7 @@ Afterwards you can set up Wi-Fi and add your device to Home Assistant from this 
 
 <esp-web-install-button manifest="./lilygo-t-higrow-manifest.json"></esp-web-install-button>
 
-<script type="module" src="https://unpkg.com/esp-web-tools@9.2.0/dist/web/install-button.js?module"></script>
+<script type="module" src="https://unpkg.com/esp-web-tools@9.2.1/dist/web/install-button.js?module"></script>
 
 To enable the flower-card in home-assistant:
 
