@@ -1,9 +1,9 @@
 ---
 substitutions:
   # Dashes are not supported in devicename
-  devicename: 'lilygo_higrow_plant_sensor'
+  devicename: 'lilygohigrowplantsensor'
   device_description: 'Keep my plants safe and lively'
-  project_version: '1.0'
+  project_version: '1.1'
   update_interval: 30min
   loglevel: DEBUG
   moisture_min: '2.82'
@@ -19,6 +19,15 @@ substitutions:
 esphome:
   name: '${devicename}'
   comment: '${device_description}'
+  # Automatically add the mac address to the name
+  # so you can use a single firmware for all devices
+  name_add_mac_suffix: true
+
+  # This will allow for (future) project identification,
+  # configuration and updates.
+  project:
+    name: esphome.project-template
+    version: '${project_version}'
   on_boot:
     priority: 240
     then:
