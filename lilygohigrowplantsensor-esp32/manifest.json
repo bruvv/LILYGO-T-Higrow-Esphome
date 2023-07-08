@@ -1,0 +1,9 @@
+{
+  "chipFamily": "ESP32",
+  "parts": [
+    {
+      "path": "lilygohigrowplantsensor-esp32/lilygohigrowplantsensor-esp32.bin",
+      "offset": 0
+    }
+  ]
+}
