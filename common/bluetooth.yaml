@@ -5,5 +5,5 @@ esp32_ble_tracker:
     window: 1100ms # default 30ms
     active: true
 
-bluetooth_proxy:
-  active: true
+# bluetooth_proxy:
+#   active: true

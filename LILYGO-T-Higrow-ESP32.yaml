@@ -1,8 +1,8 @@
 ---
 substitutions:
   # Dashes are not supported in devicename
-  devicename: 'lilygohigrowplantsensor'
-  device_description: 'Keep my plants safe and lively'
+  devicename: 'higrow'
+  device_description: 'Keep my plants alive and well'
   project_version: '1.1'
   update_interval: 30min
   loglevel: DEBUG
@@ -45,19 +45,25 @@ dashboard_import:
 esp32:
   board: lolin_d32
 
-improv_serial:
+# improv_serial:
 
 wifi:
   # Use improv (after installing either go to web.esphome.io or use the installer here: https://bruvv.github.io/LILYGO-T-Higrow-Esphome)
   # ssid: !secret wifi_ssid
   # password: !secret wifi_password
   # fast_connect: True
+  ssid: "Drop It Like It's Hotspot"
+  password: 'eaglemonth065'
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: '${devicename}'
 
 captive_portal:
+
+api:
+  encryption:
+    key: orFL2QxcqtG5a6GgcJLPNTlYbjVVdcezo1tcpF5cqcY=
 
 # Web server disabled because it was using to much ram
 # web_server:
@@ -66,8 +72,6 @@ captive_portal:
 # Enable logging
 logger:
   level: '${loglevel}'
-
-api:
 
 ota:
   safe_mode: true
@@ -111,9 +115,9 @@ packages:
   text_sensors: !include common/text_sensors.yaml
   dht: !include common/dht.yaml
   plantsensors: !include common/plantsensors.yaml
-  waterpump: !include common/waterpump.yaml
+  # waterpump: !include common/waterpump.yaml
   bluetooth: !include common/bluetooth.yaml
   # Battery only works for 12 hours with deepsleep!
   # bme280: !include common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
-  # battery: !include common/battery.yaml
+  battery: !include common/battery.yaml

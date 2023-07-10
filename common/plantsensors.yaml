@@ -10,7 +10,7 @@ sensor:
     attenuation: 11db
     accuracy_decimals: 2 # comment for calibration
     unit_of_measurement: '%' # comment for calibration
-    device_class: 'moisture'
+    device_class: 'humidity'
     state_class: 'measurement'
     # unit_of_measurement: "V" # uncomment for calibration
     filters: # comment when calibrating
