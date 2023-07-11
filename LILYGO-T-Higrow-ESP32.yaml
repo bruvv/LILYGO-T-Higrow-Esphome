@@ -61,9 +61,9 @@ wifi:
 
 captive_portal:
 
-api:
-  encryption:
-    key: WrNKUTeCFWbvfouV0keji9epyAzAzK+ZnUObZWdS/RQ=
+# api:
+#   encryption:
+#     key: WrNKUTeCFWbvfouV0keji9epyAzAzK+ZnUObZWdS/RQ=
 
 # Web server disabled because it was using to much ram
 # web_server:
