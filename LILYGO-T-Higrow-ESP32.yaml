@@ -21,7 +21,7 @@ esphome:
   comment: '${device_description}'
   # Automatically add the mac address to the name
   # so you can use a single firmware for all devices
-  name_add_mac_suffix: True
+  name_add_mac_suffix: true
 
   # This will allow for (future) project identification,
   # configuration and updates.
@@ -39,8 +39,8 @@ esphome:
     then:
       - switch.turn_off: spower
 
-# dashboard_import:
-#   package_import_url: github://pbezant/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@main
+dashboard_import:
+  package_import_url: github://pbezant/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@main
 
 esp32:
   board: lolin_d32
@@ -49,9 +49,9 @@ esp32:
 
 wifi:
   # Use improv (after installing either go to web.esphome.io or use the installer here: https://bruvv.github.io/LILYGO-T-Higrow-Esphome)
-  # ssid: !secret wifi_ssid
-  # password: !secret wifi_password
-  # fast_connect: True
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: True
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
