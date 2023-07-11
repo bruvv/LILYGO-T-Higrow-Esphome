@@ -39,8 +39,8 @@ esphome:
     then:
       - switch.turn_off: spower
 
-dashboard_import:
-  package_import_url: github://bruvv/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@main
+# dashboard_import:
+#   package_import_url: github://pbezant/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@main
 
 esp32:
   board: lolin_d32
@@ -52,8 +52,6 @@ wifi:
   # ssid: !secret wifi_ssid
   # password: !secret wifi_password
   # fast_connect: True
-  ssid: "Drop It Like It's Hotspot"
-  password: 'eaglemonth065'
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
