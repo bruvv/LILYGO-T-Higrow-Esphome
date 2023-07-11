@@ -4,7 +4,7 @@ substitutions:
   devicename: 'higrow'
   device_description: 'Keep my plants alive and well'
   project_version: '1.1'
-  update_interval: 30min
+  update_interval: 1sec
   loglevel: DEBUG
   moisture_min: '2.82'
   moisture_max: '1.39'
@@ -12,9 +12,9 @@ substitutions:
   conductivity_max: '0.25'
   # Uncomment run_duration and sleep_duration if you want to use deepsleep
   # set how long to stay awake - NOT less then 10sec
-  # run_duration: 11s
+  run_duration: 1min
   # set how long to sleep in minutes
-  # sleep_duration: 60min
+  sleep_duration: 9min
 
 esphome:
   name: '${devicename}'
@@ -63,7 +63,7 @@ captive_portal:
 
 api:
   encryption:
-    key: orFL2QxcqtG5a6GgcJLPNTlYbjVVdcezo1tcpF5cqcY=
+    key: WrNKUTeCFWbvfouV0keji9epyAzAzK+ZnUObZWdS/RQ=
 
 # Web server disabled because it was using to much ram
 # web_server:
@@ -119,5 +119,5 @@ packages:
   bluetooth: !include common/bluetooth.yaml
   # Battery only works for 12 hours with deepsleep!
   # bme280: !include common/bme280.yaml
-  # deepsleep: !include common/deepsleep.yaml
+  deepsleep: !include common/deepsleep.yaml
   battery: !include common/battery.yaml
