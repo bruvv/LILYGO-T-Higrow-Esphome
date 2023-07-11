@@ -13,10 +13,10 @@ sensor:
     accuracy_decimals: 2
     filters:
       - multiply: 2
-      - calibrate_linear:
-          # Map 0.0 (from sensor) to 0.0 (true value)
-          - 0.0 -> 0.0
-          - 4.0 -> 4.0
+      # - calibrate_linear:
+      #     # Map 0.0 (from sensor) to 0.0 (true value)
+      #     - 0.0 -> 0.0
+      #     - 5.0 -> 5.0
     update_interval: ${update_interval}
 
   # Battery %
@@ -31,6 +31,6 @@ sensor:
       - multiply: 2
       - calibrate_linear:
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - 3.18 -> 0.0
+          - 2.50 -> 0.0
           - 4.20 -> 100.0
     update_interval: ${update_interval}
