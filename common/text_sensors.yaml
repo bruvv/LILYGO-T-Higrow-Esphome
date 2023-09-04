@@ -12,13 +12,6 @@ text_sensor:
   - platform: version
     hide_timestamp: true
     name: '${devicename} - ESPHome Version'
-  - platform: wifi_info
-    ip_address:
-      name: '${devicename} - IP Address'
-      icon: mdi:wifi
-    ssid:
-      name: '${devicename} - SSID'
-      icon: mdi:wifi-strength-2
 
 sensor:
   - platform: wifi_signal
