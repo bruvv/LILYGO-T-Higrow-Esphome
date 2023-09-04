@@ -1,7 +1,7 @@
 ---
 substitutions:
   # Dashes are not supported in devicename
-  devicename: 'plantsensor'
+  devicename: 'lilygohigrowplantsensor'
   device_description: 'Keep my plants safe and lively'
   project_version: '1.1'
   update_interval: 30min
