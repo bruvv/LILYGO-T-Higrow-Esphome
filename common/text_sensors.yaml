@@ -17,7 +17,7 @@ text_sensor:
       name: '${devicename} - IP Address'
       icon: mdi:wifi
     ssid:
-      name: '${devicename} - Connected SSID'
+      name: '${devicename} - SSID'
       icon: mdi:wifi-strength-2
 
 sensor:
