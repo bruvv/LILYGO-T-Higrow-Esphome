@@ -3,7 +3,7 @@ sensor:
   # DHT
   - platform: dht
     pin: 16
-    model: dht11
+    #model: dht11
     temperature:
       name: '${devicename} DHT Temperature'
       unit_of_measurement: '°C'
