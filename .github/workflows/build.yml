@@ -20,7 +20,7 @@ jobs:
         with:
           config_file: .github/yamllint.yml
       - name: Build ESPHome firmware to verify configuration
-        uses: esphome/build-action@v1.8.0
+        uses: esphome/build-action@v1.9.0
         with:
           yaml_file: ${{ matrix.file }}
   publish:
