@@ -1,15 +1,15 @@
 ---
 substitutions:
   # Dashes are not supported in devicename
-  devicename: 'lilygohigrowplantsensor'
-  device_description: 'Keep my plants safe and lively'
-  project_version: '1.1'
+  devicename: "lilygohigrowplantsensor"
+  device_description: "Keep my plants safe and lively"
+  project_version: "1.1"
   update_interval: 30min
   loglevel: DEBUG
-  moisture_min: '2.82'
-  moisture_max: '1.39'
-  conductivity_min: '0.075'
-  conductivity_max: '0.25'
+  moisture_min: "2.82"
+  moisture_max: "1.39"
+  conductivity_min: "0.075"
+  conductivity_max: "0.25"
   # Uncomment run_duration and sleep_duration if you want to use deepsleep
   # set how long to stay awake - NOT less then 10sec
   # run_duration: 11s
@@ -17,8 +17,8 @@ substitutions:
   # sleep_duration: 60min
 
 esphome:
-  name: '${devicename}'
-  comment: '${device_description}'
+  name: "${devicename}"
+  comment: "${device_description}"
   # Automatically add the mac address to the name
   # so you can use a single firmware for all devices
   name_add_mac_suffix: true
@@ -27,7 +27,7 @@ esphome:
   # configuration and updates.
   project:
     name: esphome.project-template
-    version: '${project_version}'
+    version: "${project_version}"
   on_boot:
     priority: 240
     then:
@@ -55,7 +55,7 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: '${devicename}'
+    ssid: "${devicename}"
 
 captive_portal:
 
@@ -65,7 +65,7 @@ captive_portal:
 
 # Enable logging
 logger:
-  level: '${loglevel}'
+  level: "${loglevel}"
 
 api:
 
@@ -79,7 +79,7 @@ time:
 
 button:
   - platform: restart
-    name: 'Restart - ${devicename}'
+    name: "Restart - ${devicename}"
 
 i2c:
   sda: 25
@@ -91,7 +91,7 @@ i2c:
 switch:
   # Power Switch
   - platform: gpio
-    name: '${devicename} Sensor Power switch'
+    name: "${devicename} Sensor Power switch"
     pin:
       number: 4
       mode: INPUT_PULLUP
@@ -103,13 +103,14 @@ switch:
 sensor:
   # Wifi sensor
   - platform: wifi_signal
-    name: '${devicename} WiFi Signal'
-    id: '${devicename}_wifi_signal'
+    name: "${devicename} WiFi Signal"
+    id: "${devicename}_wifi_signal"
     update_interval: ${update_interval}
 
 packages:
   text_sensors: !include common/text_sensors.yaml
   dht: !include common/dht.yaml
+  # dht12: !include common/dht12.yaml # enable this if you use DHT12
   plantsensors: !include common/plantsensors.yaml
   waterpump: !include common/waterpump.yaml
   bluetooth: !include common/bluetooth.yaml

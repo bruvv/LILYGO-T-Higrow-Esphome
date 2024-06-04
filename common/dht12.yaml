@@ -1,7 +1,7 @@
 ---
 sensor:
   # DHT
-  - platform: dht
+  - platform: dh12
     pin: 16
     #model: dht11
     temperature:
