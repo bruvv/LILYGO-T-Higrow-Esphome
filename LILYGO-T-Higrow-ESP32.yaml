@@ -110,7 +110,6 @@ sensor:
 packages:
   text_sensors: !include common/text_sensors.yaml
   dht: !include common/dht.yaml
-  # dht12: !include common/dht12.yaml # enable this if you use DHT12
   plantsensors: !include common/plantsensors.yaml
   waterpump: !include common/waterpump.yaml
   bluetooth: !include common/bluetooth.yaml
