@@ -1,18 +1,18 @@
 ---
 sensor:
-  - platform: bme280
+  - platform: bme280_i2c
     i2c_id: bus_a
     temperature:
-      name: '${devicename} BME280 Temperature'
+      name: "${devicename} BME280 Temperature"
       oversampling: 1x
       # filters: # uncomment after calibration
       #   - offset: -2.3 # offset in °C for the measured temperature
     pressure:
-      name: '${devicename} BME280 Pressure'
+      name: "${devicename} BME280 Pressure"
       # filters: # uncomment after calibration
       #   - offset: -2.3 # offset in °C for the measured temperature
     humidity:
-      name: '${devicename} BME280 Humidity'
+      name: "${devicename} BME280 Humidity"
       # filters: # uncomment after calibration
       #   - offset: -2.3 # offset in °C for the measured temperature
     address: 0x77
