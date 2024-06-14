@@ -1,27 +1,31 @@
 ---
 sensor:
   # Battery volt
-  # - platform: adc
-  #   pin: 33
-  #   name: '${devicename} Battery Voltage'
-  #   id: '${devicename}_voltage'
-  #   attenuation: 11db
-  #   unit_of_measurement: 'V'
-  #   icon: 'mdi:battery-high'
-  #   device_class: 'voltage'
-  #   state_class: 'measurement'
-  #   accuracy_decimals: 2
-  #   filters:
-  #     - multiply: 2
-  #     - calibrate_linear:
-  #         # Map 0.0 (from sensor) to 0.0 (true value)
-  #         - 0.0 -> 0.0
-  #         - 4.0 -> 4.0
-  #   update_interval: ${update_interval}
+  - platform: adc
+    pin:
+      number: 33
+      allow_other_uses: true
+    name: "${devicename} Battery Voltage"
+    id: "${devicename}_voltage"
+    attenuation: 11db
+    unit_of_measurement: "V"
+    icon: "mdi:battery-high"
+    device_class: "voltage"
+    state_class: "measurement"
+    accuracy_decimals: 2
+    filters:
+      - multiply: 2
+      - calibrate_linear:
+          # Map 0.0 (from sensor) to 0.0 (true value)
+          - 0.0 -> 0.0
+          - 4.0 -> 4.0
+    update_interval: ${update_interval}
 
   # Battery %
   - platform: adc
-    pin: 33
+    pin:
+      number: 33
+      allow_other_uses: true
     name: "${devicename} Battery"
     id: "${devicename}_percent"
     attenuation: 11db
