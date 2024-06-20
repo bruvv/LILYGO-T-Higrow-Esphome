@@ -70,9 +70,7 @@ logger:
 api:
 
 ota:
-  safe_mode: true
-  reboot_timeout: 10min
-  num_attempts: 5
+  - platform: esphome
 
 time:
   - platform: homeassistant
