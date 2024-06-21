@@ -2,7 +2,7 @@
   "chipFamily": "ESP32",
   "ota": {
     "path": "lilygohigrowplantsensor-esp32/lilygohigrowplantsensor-esp32.ota.bin",
-    "md5": "3998f3eb25c514918d300063f4d6c8b5"
+    "md5": "8abee22964c2054a0b2792ce97f96726"
   },
   "parts": [
     {
