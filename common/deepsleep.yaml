@@ -14,6 +14,8 @@ deep_sleep:
 binary_sensor:
   - platform: gpio
     name: '${devicename} Wake Button'
-    pin: 35
+    pin: 
+      number: 35
+      allow_other_uses: true
     internal: true
     setup_priority: 1000
