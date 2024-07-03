@@ -6,6 +6,7 @@ deep_sleep:
   wakeup_pin:
     number: 35
     inverted: true
+    allow_other_uses: true
     mode:
       input: true
       # pullup: true
