@@ -28,7 +28,7 @@ jobs:
   publish:
     needs: build
     name: Publish firmware
-    uses: bruvv/workflows/.github/workflows/publish.yml@main
+    uses: esphome/workflows@main
     with:
       files: LILYGO-T-Higrow-ESP32.yaml
       name: ESPHome Plant monitor
