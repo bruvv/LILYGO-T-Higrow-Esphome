@@ -90,9 +90,7 @@ switch:
   # Power Switch
   - platform: gpio
     name: "${devicename} Sensor Power switch"
-    pin:
-      number: 4
-      mode: INPUT_PULLUP
+    pin: 4
     id: spower
     restore_mode: ALWAYS_ON
     internal: true
