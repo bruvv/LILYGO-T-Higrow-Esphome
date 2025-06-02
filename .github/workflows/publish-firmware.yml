@@ -2,9 +2,8 @@
 name: Build and publish
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 permissions:
   contents: write
