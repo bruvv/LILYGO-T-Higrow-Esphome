@@ -1,13 +1,15 @@
 ---
 name: Build and publish
 
-on: [push] # yamllint disable-line rule:truthy
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     name: Building ${{ matrix.file }}
     runs-on: ubuntu-latest
-    if: needs.pr-check.outputs.number != 'null'
     strategy:
       matrix:
         file:

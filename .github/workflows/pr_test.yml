@@ -1,7 +1,9 @@
 ---
 name: Test PR
 
-on: [pull_request] # yamllint disable-line rule:truthy
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
