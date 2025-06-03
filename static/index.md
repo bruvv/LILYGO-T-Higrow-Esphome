@@ -24,99 +24,167 @@ To enable the flower-card in home-assistant:
 4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
 5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
-# How to calibrate the lilygo T-HiGrow wifi plant sensor
+# How to Calibrate the LILYGO T-Higrow Wi-Fi Plant Sensor
 
-First make sure you can flash your current sensor, otherwise you cannot continue.
-Start with opening the `plantsensors.yaml` file to change some settings.
+Before starting, make sure you’re able to flash your sensor — otherwise, calibration won’t be possible.
 
-Find the following comments:
+---
 
-`# comment when calibrating`
+## Step 1: Edit `plantsensors.yaml`
 
-Place a comment in front of that line. For example:
-
-`unit_of_measurement: '%' # comment for calibration`
-
-will become:
-
-`# unit_of_measurement: '%' # comment for calibration`
-
-Do this for every line you find.
-
-Find the `# uncomment for calibration` line and change it. For example:
-
-`# unit_of_measurement: "V" # uncomment for calibration`
-
-Becomes:
-
-`unit_of_measurement: "V" # uncomment for calibration`
-
-Now do this for every line you find in `plantsensors.yaml`.
-
-After you did this, it is time to generate the configuration again, for this you need ESPHOME. You can do this in the addon in home assistant or, much quicker, on your own PC with the following command, but first insert your sensor with USB to your PC.
-
-`esphome run LILYGO-T-Higrow-ESP32.yaml`
-
-This will compile and flash the file. While it is compiling, get some glass with water. After you have flashed the file you will see a log output. This is great! We need it for the measurements. Make sure to clean the sensor and make sure it is totally dry as we need a dry measurement first.
-
-![IMG_20221207_154457](https://user-images.githubusercontent.com/3063928/206223822-7d18fa3e-08d3-46d3-9e20-9d20245d3f73.jpg)
-
-After drying the sensor look in the log file for the measurements, look for the following 2 lines:
-
-```
-[15:46:50][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Conductivity': Sending state 0.07500 V with 2 decimals of accuracy
-[15:46:46][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Moisture': Sending state 2.83500 V with 2 decimals of accuracy
-```
-
-Note the: `0.07500 V` and `2.83500 V`
-
-Now let the sensor run for at least 10 minutes and leave it untouched!
-
-After 10 minutes check the measurements again. In my case: conductivity stayed: `0.07500 V` and moisture stayed: `2.83500 V` we can write that in our yaml.
-
-Open `LILYGO-T-Higrow-ESP32.yaml` and find the following:
+Open the `plantsensors.yaml` file and locate lines marked with:
 
 ```yaml
-moisture_min: "2.82"
-moisture_max: "1.39"
+# comment when calibrating
+```
+
+You need to **comment out** those lines. For example:
+
+**Original:**
+
+```yaml
+unit_of_measurement: '%' # comment for calibration
+```
+
+**Becomes:**
+
+```yaml
+# unit_of_measurement: '%' # comment for calibration
+```
+
+Repeat this for every line that includes `# comment when calibrating`.
+
+Then, locate lines marked like this:
+
+```yaml
+# unit_of_measurement: "V" # uncomment for calibration
+```
+
+And **uncomment** them like so:
+
+```yaml
+unit_of_measurement: "V" # uncomment for calibration
+```
+
+Repeat this for each similar line in the file.
+
+---
+
+## Step 2: Flash the Firmware
+
+Once you've made the changes:
+
+1. Plug in your T-Higrow sensor via USB.
+2. Open a terminal and run the following:
+
+```bash
+esphome run LILYGO-T-Higrow-ESP32.yaml
+```
+
+> You can do this through Home Assistant (ESPHome Addon), but flashing via your PC is usually faster.
+
+While it's compiling, grab a glass of water — you’ll need it later.
+
+---
+
+## Step 3: Get a Dry Measurement
+
+After flashing:
+
+1. **Clean and dry** the sensor completely.
+2. Watch the log output. Look for lines like these:
+
+```
+[15:46:50][D][sensor:127]: '... Soil Conductivity': Sending state 0.07500 V
+[15:46:46][D][sensor:127]: '... Soil Moisture': Sending state 2.83500 V
+```
+
+> **Write down the values** — these are your **dry (minimum)** readings.
+
+![Dry Measurement](https://user-images.githubusercontent.com/3063928/206223822-7d18fa3e-08d3-46d3-9e20-9d20245d3f73.jpg)
+
+Let the sensor run untouched for 10 minutes, then confirm the readings are stable.
+
+---
+
+## Step 4: Update Your YAML with Dry Values
+
+Open `LILYGO-T-Higrow-ESP32.yaml` and set the dry values you just recorded:
+
+```yaml
+moisture_min: "2.83"
 conductivity_min: "0.075"
-conductivity_max: "0.25"
 ```
 
-This means, `2.82` and `0.075` are the minimum values that we measuret when it is actually 0%. We adjust this to what we found during our calibration.
+---
 
-Now we have to change the max reading of the sensor, this means it is water time! Put the sensor in the water up till the white line. So make very sure not to put it in too much!
+## Step 5: Get a Wet Measurement
 
-![IMG_20221207_162203](https://user-images.githubusercontent.com/3063928/206223859-1298feb0-ba4f-43c8-bac1-8a1610380c3b.jpg)
+Now submerge the sensor **up to the white line** in water. Don’t go too deep.
 
-So we now look for the higher numbers when it is (half) submerged, again look in the log files and note the voltage readings as previously explained:
+![Wet Measurement](https://user-images.githubusercontent.com/3063928/206223859-1298feb0-ba4f-43c8-bac1-8a1610380c3b.jpg)
 
-```
-[16:22:22][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Conductivity': Sending state 0.24400 V with 2 decimals of accuracy
-[16:22:25][D][sensor:127]: 'lilygo_higrow_plant_sensor Soil Moisture': Sending state 1.37300 V with 2 decimals of accuracy
-```
-
-So we write them down in the `LILYGO-T-Higrow-ESP32.yaml` again but now the higher numbers.
-
-After you written down the correct numbers it is time to uncomment the commented section again, for example:
+Again, check the log output for readings like:
 
 ```
-  # Fertilizer sensor
-  - platform: adc
-    pin: GPIO34
-    name: '${devicename} Soil Conductivity'
-    icon: 'mdi:flower'
-    update_interval: ${update_interval}
-    accuracy_decimals: 2 # comment for calibration
-    unit_of_measurement: 'µS/cm' # comment when calibrating
-    # unit_of_measurement: "V" # uncomment for raw data
-    filters: # comment when calibrating
-      - calibrate_linear: # comment when calibrating
-          # Map 0.0 (from sensor) to 0.0 (true value)
-          - ${conductivity_min} -> 0.0 # comment when calibrating
-          - ${conductivity_max} -> 100.0 # comment when calibrating
+[16:22:22][D][sensor:127]: '... Soil Conductivity': Sending state 0.24400 V
+[16:22:25][D][sensor:127]: '... Soil Moisture': Sending state 1.37300 V
 ```
 
-Reflash it again with the previous command: `esphome run LILYGO-T-Higrow-ESP32.yaml` and it is now calibrated!
+These are your **wet (maximum)** readings.
 
-You can also calibrate the temperature and humidity sensors, please read the `dht.yaml` or `bme280.yaml` to set the correct offsets.
+---
+
+## Step 6: Update Your YAML with Wet Values
+
+Add the new max values to your config:
+
+```yaml
+moisture_max: "1.373"
+conductivity_max: "0.244"
+```
+
+---
+
+## Step 7: Re-enable Sensor Filtering
+
+Now that calibration is done, **revert the comments** in `plantsensors.yaml`. For example:
+
+```yaml
+# Fertilizer sensor
+- platform: adc
+  pin: GPIO34
+  name: '${devicename} Soil Conductivity'
+  icon: 'mdi:flower'
+  update_interval: ${update_interval}
+  accuracy_decimals: 2
+  unit_of_measurement: 'µS/cm'
+  # unit_of_measurement: "V" # uncomment for raw data
+  filters:
+    - calibrate_linear:
+        - ${conductivity_min} -> 0.0
+        - ${conductivity_max} -> 100.0
+```
+
+---
+
+## Step 8: Reflash the Calibrated Firmware
+
+Reflash with:
+
+```bash
+esphome run LILYGO-T-Higrow-ESP32.yaml
+```
+
+You're now running with calibrated sensor values!
+
+---
+
+## Bonus: Temperature & Humidity Calibration
+
+If you're using temperature/humidity sensors, open either:
+
+- `dht.yaml` (for DHT11/DHT22)
+- `bme280.yaml` (for BME280)
+
+…and adjust the offsets in those files to calibrate them as well.
