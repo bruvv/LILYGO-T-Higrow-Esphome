@@ -22,7 +22,7 @@ jobs:
       matrix:
         #### Modify below here to match your project ####
         file:
-          - LILYGO-T-Higrow-ESP32.yaml
+          - LILYGO-T-Higrow-ESP32
         esphome-version:
           - stable
           - beta
