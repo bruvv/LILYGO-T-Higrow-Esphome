@@ -1,6 +1,5 @@
 # ESPHome firmware for a LILYGO T-Higrow WIFI Plant Sensor
 
-[![Build](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/actions/workflows/build.yml/badge.svg)](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/actions/workflows/build.yml)
 [![License](https://img.shields.io/github/license/bruvv/LILYGO-T-Higrow-Esphome.svg)](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LICENSE)
 
 This [ESPHome](https://esphome.io/) configuration builds firmware for the LILYGO T-Higrow plantsensor. It monitors:

@@ -9,9 +9,9 @@ ESPHome firmware for the LILYGO T-Higrow WIFI Plant Sensor
 You can use the blue button "connect" below to install the pre-built firmware directly to your device via USB from your web browser.
 
 Afterwards you can set up Wi-Fi and add your device to Home Assistant from this same web page. Make sure that it is on the same network as home-assistant is and it will connect automatically with the api of the plantsensor.
-<esp-web-install-button manifest="firmware/project-template.manifest.json"></esp-web-install-button>
+<esp-web-install-button manifest="firmware/lilgo-t-higrow-esp32.manifest.json"></esp-web-install-button>
 
-<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+<!-- <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script> -->
 <!-- <esp-web-install-button manifest="./lilygo-t-higrow-manifest.json"></esp-web-install-button>
 
 <script type="module" src="https://unpkg.com/esp-web-tools/dist/web/install-button.js?module"></script> -->
