@@ -10,18 +10,18 @@ This [ESPHome](https://esphome.io/) configuration builds firmware for the LILYGO
 - Temperature
 - Humidity
 
-With a beatiful dashboard card:
+With a beautiful dashboard card:
 
 ![Plantflower card](https://user-images.githubusercontent.com/203184/183286657-824a0e7f-a140-4d8e-8d6a-387070419dfd.png)
 
 # Requirements
 
-- [Plant sensor itself](https://s.click.aliexpress.com/e/_ongLgQM)
+- [Plant sensor](https://s.click.aliexpress.com/e/_ongLgQM) itself
 - [ESPHome](https://esphome.io/)
 
 Optionally:
 
-- [Water pump](https://s.click.aliexpress.com/e/_DefUZbV) (is not sold any more :( ))
+- [Water pump](https://s.click.aliexpress.com/e/_DefUZbV) (is not sold any more :( )
 - [Long USB-C Cable](https://s.click.aliexpress.com/e/_oFPnq9a)
 - [Cheap USB charger](https://s.click.aliexpress.com/e/_ombe20g)
 - LiPo or Li-Ion battery
@@ -31,13 +31,13 @@ Optionally:
 - [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
 - [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
-# How to install (easy)
+## How to install (easy)
 
 This project automates the building process. So all you need to do is open Chrome, Edge or Opera and go to the [installation page](https://bruvv.github.io/LILYGO-T-Higrow-Esphome). Connect the ESP32 to your computer via USB and read the instructions on that page.
 
-# How to install (expert)
+## How to install (expert)
 
-To use this configuration, adjust the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) and changes the `Subsitions`. If you want to adjust specific settings or do a [calbiration](https://bruvv.github.io/LILYGO-T-Higrow-Esphome/#how-to-calibrate-the-lilygo-t-higrow-wifi-plant-sensor), the relevant YAML files are in the `common` directory.
+To use this configuration, adjust the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) and changes the `Subsitutions`. If you want to adjust specific settings or do a [calibration](https://bruvv.github.io/LILYGO-T-Higrow-Esphome/#how-to-calibrate-the-lilygo-t-higrow-wifi-plant-sensor), the relevant YAML files are in the `common` directory.
 
 After this, flash the firmware to your device, e.g. with:
 
@@ -47,7 +47,9 @@ esphome run LILYGO-T-Higrow-ESP32.yaml
 
 After you have added your device to Home Assistant ESPHome Integration, the sensors are available in Home Assistant.
 
-To enable the flower-card in home-assistant:
+## Enable the Flower Card
+
+To enable the `flower-card` in home-assistant:
 
 1. Get - [OpenPlantBook API](https://open.plantbook.io/)
 2. Install [HACS](https://hacs.xyz/docs/setup/download/)
@@ -63,7 +65,7 @@ You can find these in the directory [common](https://github.com/bruvv/LILYGO-T-H
 
 [battery.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/battery.yaml)
 
-If you bought a battery and hooked it up to the esp then you will need to enable this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml). The default battery will run for 12 hours with deep sleep enabled.
+If you bought a battery and hooked it up to the esp then you will need to uncomment `battery` in the `packages` section in [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml). The default battery will run for 12 hours with deep sleep enabled.
 
 [bluetooth.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/bluetooth.yaml)
 
@@ -71,11 +73,11 @@ This will enable bluetooth (proxy) so you can have the bluetooth functionality e
 
 [bme280.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/bme280.yaml)
 
-If you bought the bme280 sensor option please enable this.
+If you bought the bme280 sensor option please uncomment `bme280`.
 
 [Deepsleep.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/deepsleep.yaml)
 
-If you want to run the battery it is wise to enable this so it will sleep. You can do this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml)
+If you want to run the battery it is wise to enable this so it will sleep. You can do this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) by uncommenting the `deepslepp` line.
 
 [dht.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/dht.yaml)
 
