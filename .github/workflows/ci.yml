@@ -7,6 +7,7 @@ on:
       - '.github/workflows/ci.yml'
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
