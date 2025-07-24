@@ -14,8 +14,7 @@ jobs:
     uses: esphome/workflows/.github/workflows/build.yml@2025.4.0
     with:
       #### Modify below here to match your project ####
-      files: |
-        - LILYGO-T-Higrow-ESP32.yaml
+      files: LILYGO-T-Higrow-ESP32.yaml
       esphome-version: 2025.4.0
       combined-name: lilgo-t-higrow-esp32
       #### Modify above here to match your project ####
