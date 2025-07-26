@@ -9,13 +9,13 @@ deep_sleep:
   #   allow_other_uses: true
   #   mode:
   #     input: true
-      # pullup: true
+  #     pullup: true
 
 # Wake Button
 # binary_sensor:
 #   - platform: gpio
 #     name: '${devicename} Wake Button'
-#     pin: 
+#     pin:
 #       number: 35
 #       allow_other_uses: true
 #     internal: true
