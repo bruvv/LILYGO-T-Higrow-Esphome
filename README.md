@@ -27,8 +27,8 @@ Optionally:
 - LiPo or Li-Ion battery
 - [HACS](https://hacs.xyz/docs/setup/download/)
 - [OpenPlantBook API](https://open.plantbook.io/)
-- [Homeassistant Plantbook intergration](https://github.com/Olen/homeassistant-plant)
-- [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
+- [Homeassistant Plantbook integration](https://github.com/Olen/homeassistant-plant)
+- [Homeassistant Plantbook API integration](https://github.com/Olen/home-assistant-openplantbook)
 - [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
 ## How to install (easy)
@@ -37,7 +37,7 @@ This project automates the building process. So all you need to do is open Chrom
 
 ## How to install (expert)
 
-To use this configuration, adjust the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) and changes the `Subsitutions`. If you want to adjust specific settings or do a [calibration](https://bruvv.github.io/LILYGO-T-Higrow-Esphome/#how-to-calibrate-the-lilygo-t-higrow-wifi-plant-sensor), the relevant YAML files are in the `common` directory.
+To use this configuration, adjust the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) and change the `Substitutions`. If you want to adjust specific settings or do a [calibration](https://bruvv.github.io/LILYGO-T-Higrow-Esphome/#how-to-calibrate-the-lilygo-t-higrow-wifi-plant-sensor), the relevant YAML files are in the `common` directory.
 
 After this, flash the firmware to your device, e.g. with:
 
@@ -53,8 +53,8 @@ To enable the `flower-card` in home-assistant:
 
 1. Get - [OpenPlantBook API](https://open.plantbook.io/)
 2. Install [HACS](https://hacs.xyz/docs/setup/download/)
-3. Install [Homeassistant Plantbook intergration](https://github.com/Olen/homeassistant-plant)
-4. Install [Homeassistant Plantbook api intergration](https://github.com/Olen/home-assistant-openplantbook)
+3. Install [Homeassistant Plantbook integration](https://github.com/Olen/homeassistant-plant)
+4. Install [Homeassistant Plantbook API integration](https://github.com/Olen/home-assistant-openplantbook)
 5. Install [Homeassistant Flower card](https://github.com/Olen/lovelace-flower-card/tree/new_plant)
 
 # Modularity
@@ -77,7 +77,7 @@ If you bought the bme280 sensor option please uncomment `bme280`.
 
 [Deepsleep.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/deepsleep.yaml)
 
-If you want to run the battery it is wise to enable this so it will sleep. You can do this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) by uncommenting the `deepslepp` line.
+If you want to run the battery it is wise to enable this so it will sleep. You can do this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml) by uncommenting the `deepsleep` line.
 
 [dht.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/dht.yaml)
 
@@ -89,7 +89,7 @@ This sets up the sensors that go into the soil itself.
 
 [text_sensors.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/text_sensors.yaml)
 
-When you want to enable the inbuild text_sensors enable this, it will output usefull stuff to home assistant.
+When you want to enable the inbuilt text_sensors enable this, it will output useful stuff to Home Assistant.
 
 [waterpump.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/waterpump.yaml)
 

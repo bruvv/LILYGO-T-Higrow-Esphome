@@ -11,7 +11,7 @@ substitutions:
   conductivity_min: "0.075"
   conductivity_max: "0.25"
   # Uncomment run_duration and sleep_duration if you want to use deepsleep
-  # set how long to stay awake - NOT less then 10sec
+  # set how long to stay awake - NOT less than 10sec
   # run_duration: 11s
   # set how long to sleep in minutes
   # sleep_duration: 60min
@@ -45,7 +45,7 @@ dashboard_import:
 esp32:
   board: lolin_d32
   framework:
-       type: esp-idf
+    type: esp-idf
 
 improv_serial:
 
@@ -61,7 +61,7 @@ wifi:
 
 captive_portal:
 
-# Web server disabled because it was using to much ram
+# Web server disabled because it was using too much RAM
 # web_server:
 # port: 80
 
