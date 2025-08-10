@@ -25,6 +25,7 @@ sensor:
     name: '${devicename} Soil Conductivity'
     icon: 'mdi:flower'
     update_interval: ${update_interval}
+    attenuation: 11db
     accuracy_decimals: 2 # comment for calibration
     unit_of_measurement: 'µS/cm' # comment when calibrating
     # device_class: '' # for now home assistant does not support this class
