@@ -3,10 +3,10 @@ name: CI
 on:
   pull_request:
     paths:
-      - '*.yaml'
-      - '.github/workflows/ci.yml'
-  schedule:
-    - cron: '0 0 * * *'
+      - "*.yaml"
+      - ".github/workflows/ci.yml"
+  # schedule:
+  #   - cron: '0 0 * * *'
   workflow_dispatch:
 
 concurrency:
