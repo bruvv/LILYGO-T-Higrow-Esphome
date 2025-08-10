@@ -41,7 +41,7 @@ esp32:   board: lolin_d32   framework:     type: arduino
 You can find the list of supported boards in the ESPHome documentation. Changing the framework or board may affect pin assignments; adjust GPIO numbers accordingly.
 5. Linting and coding conventions
 The YAML files in this project follow standard ESPHome style:
-Indent by two spaces per level.
+Indent by two spaces per level. Keep it within the yaml lint specifics and never go over or under.
 Use lowercase keys and strings where possible. Values in the substitutions section should be quoted if they contain special characters.
 Wrap long lines for readability, but avoid trailing spaces.
 Keep packages: entries alphabetically sorted. When adding a new component, create a separate YAML file in common/ and include it from the main file.
