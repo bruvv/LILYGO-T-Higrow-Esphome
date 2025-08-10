@@ -106,11 +106,11 @@ sensor:
     update_interval: ${update_interval}
 
 packages:
-  text_sensors: !include common/text_sensors.yaml
+  bluetooth: !include common/bluetooth.yaml
   dht: !include common/dht.yaml
   plantsensors: !include common/plantsensors.yaml
+  text_sensors: !include common/text_sensors.yaml
   waterpump: !include common/waterpump.yaml
-  bluetooth: !include common/bluetooth.yaml
   # Battery only works for 12 hours with deepsleep!
   # bme280: !include common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
