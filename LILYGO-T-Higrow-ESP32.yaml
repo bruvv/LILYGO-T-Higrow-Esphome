@@ -4,7 +4,7 @@ substitutions:
   devicename: "lilygohigrowplantsensor"
   device_description: "Keep my plants safe and lively"
   project_version: "1.1"
-  update_interval: 30min # Set this to e.g. 1min when calibrating
+  update_interval: 3min # Set this to e.g. 1min when calibrating
   loglevel: DEBUG
   moisture_min: "2.82"
   moisture_max: "1.39"
@@ -12,7 +12,7 @@ substitutions:
   conductivity_max: "0.25"
   # Uncomment run_duration and sleep_duration if you want to use deepsleep
   # set how long to stay awake - NOT less than 10sec
-  # run_duration: 11s
+  # run_duration: 60s
   # set how long to sleep in minutes
   # sleep_duration: 60min
 
@@ -114,4 +114,4 @@ packages:
   # Battery only works for 12 hours with deepsleep!
   # bme280: !include common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
-  # battery: !include common/battery.yaml
+  battery: !include common/battery.yaml
