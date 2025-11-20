@@ -15,7 +15,7 @@ jobs:
           - LILYGO-T-Higrow-ESP32.yaml
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: yaml-lint
         uses: ibiqlik/action-yamllint@v3
         with:
