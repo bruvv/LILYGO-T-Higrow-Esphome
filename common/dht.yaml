@@ -5,7 +5,8 @@ sensor:
     pin: 16
     # model: dht11
     temperature:
-      name: "${devicename} DHT Temperature"
+      name: "${friendly_name} DHT Temperature"
+      id: "${devicename}_dht_temperature"
       unit_of_measurement: "°C"
       icon: "mdi:thermometer"
       device_class: "temperature"
@@ -14,7 +15,8 @@ sensor:
       # filters: # uncomment after calibration
       #   - offset: -2.3 # offset in °C for the measured temperature
     humidity:
-      name: "${devicename} DHT Humidity"
+      name: "${friendly_name} DHT Humidity"
+      id: "${devicename}_dht_humidity"
       unit_of_measurement: "%"
       icon: "mdi:cloud-percent"
       device_class: "humidity"

@@ -5,7 +5,7 @@ sensor:
     pin:
       number: 33
       allow_other_uses: true
-    name: "${devicename} Battery Voltage"
+    name: "${friendly_name} Battery Voltage"
     id: "${devicename}_voltage"
     attenuation: 11db
     unit_of_measurement: "V"
@@ -26,7 +26,7 @@ sensor:
     pin:
       number: 33
       allow_other_uses: true
-    name: "${devicename} Battery"
+    name: "${friendly_name} Battery"
     id: "${devicename}_percent"
     attenuation: 11db
     accuracy_decimals: 2
