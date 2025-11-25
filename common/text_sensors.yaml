@@ -3,7 +3,8 @@
 text_sensor:
   # Installed version
   - platform: template
-    name: '${devicename} - Installed version'
+    name: '${friendly_name} - Installed version'
+    id: '${devicename}_version'
     icon: 'mdi:label-outline'
     entity_category: diagnostic
     lambda: |-
@@ -11,10 +12,5 @@ text_sensor:
     update_interval: 6h
   - platform: version
     hide_timestamp: true
-    name: '${devicename} - ESPHome Version'
-
-sensor:
-  - platform: wifi_signal
-    name: '${devicename} - WiFi Signal'
-    update_interval: ${update_interval}
-    icon: mdi:wifi-strength-1
+    name: '${friendly_name} - ESPHome Version'
+    id: '${devicename}_esphome_version'

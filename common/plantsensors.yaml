@@ -3,44 +3,45 @@ sensor:
   # Soil humidity %
   - platform: adc
     pin: GPIO32
-    name: '${devicename} Soil Moisture'
+    name: '${friendly_name} Soil Moisture'
     id: ${devicename}_moisture
     icon: 'mdi:watering-can'
     update_interval: ${update_interval}
     attenuation: 11db
-    accuracy_decimals: 2 # comment for calibration
-    unit_of_measurement: '%' # comment for calibration
+    accuracy_decimals: '${ 5 if calibration_mode else 2 }'
+    unit_of_measurement: '${ "V" if calibration_mode else "%" }'
     device_class: 'moisture'
     state_class: 'measurement'
     # unit_of_measurement: "V" # uncomment for calibration
     filters: # comment when calibrating
       - calibrate_linear: # comment when calibrating
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - ${moisture_min} -> 0.0 # comment when calibrating
-          - ${moisture_max} -> 100.0 # comment when calibrating
+          - ${0.0 if calibration_mode else moisture_min} -> 0.0 # comment when calibrating
+          - ${100.0 if calibration_mode else moisture_max} -> 100.0 # comment when calibrating
 
   # Fertilizer sensor
   - platform: adc
     pin: GPIO34
-    name: '${devicename} Soil Conductivity'
+    name: '${friendly_name} Soil Conductivity'
+    id: '${devicename}_soil_conductivity'
     icon: 'mdi:flower'
     update_interval: ${update_interval}
     attenuation: 11db
-    accuracy_decimals: 2 # comment for calibration
-    unit_of_measurement: 'µS/cm' # comment when calibrating
+    accuracy_decimals: '${ 5 if calibration_mode else 2 }'
+    unit_of_measurement: '${ "V" if calibration_mode else "µS/cm" }'
     # device_class: '' # for now home assistant does not support this class
     state_class: 'measurement'
-    # unit_of_measurement: "V" # uncomment for raw data
-    filters: # comment when calibrating
-      - calibrate_linear: # comment when calibrating
+    filters:
+      - calibrate_linear:
           # Map 0.0 (from sensor) to 0.0 (true value)
-          - ${conductivity_min} -> 0.0 # comment when calibrating
-          - ${conductivity_max} -> 100.0 # comment when calibrating
+          - ${0.0 if calibration_mode else conductivity_min} -> 0.0
+          - ${100.0 if calibration_mode else conductivity_max} -> 100.0
 
   # Lux sensor
   - platform: bh1750
     i2c_id: bus_a
-    name: '${devicename} BH1750 Illuminance'
+    name: '${friendly_name} BH1750 Illuminance'
+    id: '${devicename}_bh1750_illuminance'
     address: 0x23
     unit_of_measurement: 'lx'
     icon: 'mdi:white-balance-sunny'

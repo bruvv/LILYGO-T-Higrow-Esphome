@@ -2,6 +2,7 @@
 substitutions:
   # Dashes are not supported in devicename
   devicename: "lilygohigrowplantsensor"
+  friendly_name: "Plant Sensor"
   device_description: "Keep my plants safe and lively"
   project_version: "1.1"
   update_interval: 30min # Set this to e.g. 1min when calibrating
@@ -15,9 +16,12 @@ substitutions:
   # run_duration: 11s
   # set how long to sleep in minutes
   # sleep_duration: 60min
+  # Set to true when calibrating the sensors
+  calibration_mode: false
 
 esphome:
   name: "${devicename}"
+  friendly_name: "${friendly_name}"
   comment: "${device_description}"
   # Automatically add the mac address to the name
   # so you can use a single firmware for all devices
@@ -79,7 +83,7 @@ time:
 
 button:
   - platform: restart
-    name: "Restart - ${devicename}"
+    name: "Restart - ${friendly_name}"
 
 i2c:
   sda: 25
@@ -91,7 +95,7 @@ i2c:
 switch:
   # Power Switch
   - platform: gpio
-    name: "${devicename} Sensor Power switch"
+    name: "${friendly_name} Sensor Power switch"
     pin: 4
     id: spower
     restore_mode: ALWAYS_ON
@@ -101,7 +105,7 @@ switch:
 sensor:
   # Wifi sensor
   - platform: wifi_signal
-    name: "${devicename} WiFi Signal"
+    name: "${friendly_name} WiFi Signal"
     id: "${devicename}_wifi_signal"
     update_interval: ${update_interval}
 
