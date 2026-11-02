@@ -1,0 +1,8 @@
+---
+# CI variant: I2C BME280 instead of DHT.
+packages:
+  base: !include ../LILYGO-T-Higrow-ESP32.yaml
+  bme280: !include ../common/bme280.yaml
+
+sensor:
+  - id: !remove higrow_dht

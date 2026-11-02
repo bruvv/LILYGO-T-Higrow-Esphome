@@ -1,0 +1,26 @@
+---
+# Example for an ADOPTED device, not for the shared factory firmware.
+# Create local secrets.yaml with unique values; never commit them to Git.
+substitutions:
+  devicename: living-room-plant
+  friendly_name: Living Room Plant
+
+packages:
+  higrow: github://bruvv/LILYGO-T-Higrow-Esphome/LILYGO-T-Higrow-ESP32.yaml@main
+
+esphome:
+  name: living-room-plant
+  name_add_mac_suffix: false
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "Living Room Plant Recovery"
+    password: !secret fallback_ap_password
+
+captive_portal:
+
+api:
+  encryption:
+    key: !secret api_encryption_key

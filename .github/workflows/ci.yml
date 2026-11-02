@@ -1,37 +1,51 @@
-name: CI
+name: ESPHome validation
 
 on:
   pull_request:
-    paths:
-      - "*.yaml"
-      - ".github/workflows/ci.yml"
-  # schedule:
-  #   - cron: '0 0 * * *'
+  push:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  ci:
-    name: Building ${{ matrix.file }} / ${{ matrix.esphome-version }}
+  lint:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ibiqlik/action-yamllint@v3
+        with:
+          config_file: .github/yamllint.yml
+
+  build:
+    name: "${{ matrix.file }} / ${{ matrix.esphome-version }}"
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.esphome-version == 'beta' }}
     strategy:
       fail-fast: false
       max-parallel: 3
       matrix:
-        #### Modify below here to match your project ####
-        file:
-          - LILYGO-T-Higrow-ESP32
-        esphome-version:
-          - stable
-          - beta
+        include:
+          - file: LILYGO-T-Higrow-ESP32.yaml
+            esphome-version: 2026.10.1
+          - file: tests/bme280.yaml
+            esphome-version: 2026.10.1
+          - file: tests/battery.yaml
+            esphome-version: 2026.10.1
+          - file: tests/calibration.yaml
+            esphome-version: 2026.10.1
+          - file: tests/waterpump.yaml
+            esphome-version: 2026.10.1
+          - file: LILYGO-T-Higrow-ESP32.yaml
+            esphome-version: beta
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v7
-      - name: ESPHome ${{ matrix.esphome-version }}
-        uses: esphome/build-action@v8.1.0
+      - uses: actions/checkout@v7
+      - uses: esphome/build-action@v8.1.0
         with:
-          yaml-file: ${{ matrix.file }}.yaml
+          yaml-file: ${{ matrix.file }}
           version: ${{ matrix.esphome-version }}

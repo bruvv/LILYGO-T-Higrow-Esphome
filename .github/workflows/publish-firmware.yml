@@ -15,7 +15,7 @@ jobs:
     with:
       #### Modify below here to match your project ####
       files: LILYGO-T-Higrow-ESP32.yaml
-      esphome-version: 2025.4.0
+      esphome-version: 2026.10.1
       combined-name: lilgo-t-higrow-esp32
       #### Modify above here to match your project ####
 

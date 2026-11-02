@@ -1,25 +1,59 @@
 ---
+# OPTIONAL: GPIO19 pump control. Enable only with a properly rated driver,
+# flyback protection, a separate pump supply, and physical leak protection.
+# No automatic watering is enabled after reboot.
 switch:
   - platform: gpio
     pin: GPIO19
-    name: 'Water Pump'
-    id: water
+    id: higrow_pump_relay
+    internal: true
+    restore_mode: ALWAYS_OFF
+  - platform: template
+    name: "${friendly_name} Automatic Watering"
+    id: higrow_auto_watering
+    icon: mdi:water-pump
+    optimistic: true
+    restore_mode: ALWAYS_OFF
+    turn_off_action:
+      - script.stop: higrow_watering_cycle
+      - switch.turn_off: higrow_pump_relay
 
-climate:
-  - platform: bang_bang
-    visual:
-      min_temperature: 0
-      max_temperature: 100
-      temperature_step: 1
+sensor:
+  # React only to a fresh measured value; stale readings never start a cycle.
+  - platform: copy
+    source_id: ${devicename}_moisture
+    id: higrow_watering_moisture
+    internal: true
+    on_value:
+      then:
+        - if:
+            condition:
+              lambda: 'return !std::isfinite(x) || x >= ${waterpump_stop_above};'
+            then:
+              - script.stop: higrow_watering_cycle
+              - switch.turn_off: higrow_pump_relay
+        - if:
+            condition:
+              lambda: 'return std::isfinite(x) && x >= 0.0f && x < ${waterpump_start_below} && id(higrow_auto_watering).state;'
+            then:
+              - script.execute: higrow_watering_cycle
 
-    name: "${friendly_name} Regler"
-    id: "${devicename}_regler"
-    sensor: ${devicename}_moisture
-    default_target_temperature_low: 20
-    default_target_temperature_high: 70
-
-    heat_action:
-      - switch.turn_on: water
-
-    idle_action:
-      - switch.turn_off: water
+script:
+  - id: higrow_watering_cycle
+    mode: single
+    then:
+      - if:
+          condition:
+            and:
+              - switch.is_on: higrow_auto_watering
+              - lambda: |-
+                  return id(higrow_watering_moisture).has_state()
+                    && std::isfinite(id(higrow_watering_moisture).state)
+                    && id(higrow_watering_moisture).state >= 0.0f
+                    && id(higrow_watering_moisture).state < ${waterpump_start_below};
+          then:
+            - switch.turn_on: higrow_pump_relay
+            - delay: ${waterpump_max_run_time}
+            - switch.turn_off: higrow_pump_relay
+            # A running script ignores further triggers throughout cooldown.
+            - delay: ${waterpump_cooldown}

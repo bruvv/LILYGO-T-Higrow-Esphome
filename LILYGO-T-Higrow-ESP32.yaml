@@ -4,25 +4,32 @@ substitutions:
   devicename: "lilygohigrowplantsensor"
   friendly_name: "Plant Sensor"
   device_description: "Keep my plants safe and lively"
-  project_version: "1.1"
+  project_version: "1.7.0-dev"
   update_interval: 30min # Set this to e.g. 1min when calibrating
-  loglevel: DEBUG
+  loglevel: INFO
   moisture_min: "2.82"
   moisture_max: "1.39"
   conductivity_min: "0.075"
   conductivity_max: "0.25"
-  # Uncomment run_duration and sleep_duration if you want to use deepsleep
-  # set how long to stay awake - NOT less than 10sec
-  # run_duration: 11s
-  # set how long to sleep in minutes
-  # sleep_duration: 60min
+  # Battery sleep profile (enable battery + deepsleep packages below).
+  # This is a fail-safe awake limit; the sleep script normally sleeps sooner.
+  run_duration: 90s
+  sleep_duration: 60min
   # Set to true when calibrating the sensors
   calibration_mode: false
+  # The BH1750 already measures lux: use 1.0 unless verified against a meter.
+  bh1750_correction_factor: "1.0"
+  # These safety limits apply only when the optional pump package is enabled.
+  waterpump_start_below: "20.0"
+  waterpump_stop_above: "40.0"
+  waterpump_max_run_time: 5s
+  waterpump_cooldown: 6h
 
 esphome:
   name: "${devicename}"
   friendly_name: "${friendly_name}"
   comment: "${device_description}"
+  min_version: 2026.10.0
   # Automatically add the mac address to the name
   # so you can use a single firmware for all devices
   name_add_mac_suffix: true
@@ -30,7 +37,7 @@ esphome:
   # This will allow for (future) project identification,
   # configuration and updates.
   project:
-    name: esphome.project-template
+    name: bruvv.lilygo_t_higrow
     version: "${project_version}"
   on_boot:
     priority: 240
@@ -59,11 +66,8 @@ wifi:
   # password: !secret wifi_password
   # fast_connect: True
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "${devicename}"
-
-captive_portal:
+  # No unsecured fallback AP in the public firmware. Adopt with USB Improv.
+  # After adoption, optionally configure an individual password-protected AP.
 
 # Web server disabled because it was using too much RAM
 # web_server:
@@ -114,8 +118,10 @@ packages:
   dht: !include common/dht.yaml
   plantsensors: !include common/plantsensors.yaml
   text_sensors: !include common/text_sensors.yaml
-  waterpump: !include common/waterpump.yaml
-  # Battery only works for 12 hours with deepsleep!
+  # Watering is opt-in, with a safe disabled-on-boot switch:
+  # waterpump: !include common/waterpump.yaml
+  # For battery use: enable both packages, set update_interval to 10s,
+  # and remove Bluetooth (details in README). Battery runtime varies by setup.
   # bme280: !include common/bme280.yaml
   # deepsleep: !include common/deepsleep.yaml
   # battery: !include common/battery.yaml

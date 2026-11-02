@@ -1,0 +1,5 @@
+---
+# CI variant: optional protected pump controller.
+packages:
+  base: !include ../LILYGO-T-Higrow-ESP32.yaml
+  waterpump: !include ../common/waterpump.yaml

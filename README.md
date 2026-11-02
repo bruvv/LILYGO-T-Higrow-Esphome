@@ -65,11 +65,11 @@ You can find these in the directory [common](https://github.com/bruvv/LILYGO-T-H
 
 [battery.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/battery.yaml)
 
-If you bought a battery and hooked it up to the esp then you will need to uncomment `battery` in the `packages` section in [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml). The default battery will run for 12 hours with deep sleep enabled.
+If you bought a battery and hooked it up to the esp then you will need to uncomment `battery` in the `packages` section in [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml). Battery runtime depends on cell capacity, radio activity and measurement frequency. For battery use, also enable `deepsleep`, set `update_interval: 10s`, and remove the Bluetooth proxy. See the battery profile below.
 
 [bluetooth.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/bluetooth.yaml)
 
-This will enable bluetooth (proxy) so you can have the bluetooth functionality enabled. Disable when using battery.
+Bluetooth proxy is included in the USB-powered default firmware. It scans only when Home Assistant is connected, and uses a reduced scan window. Disable the BLE tracker/proxy and its API hooks when using a battery.
 
 [bme280.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/bme280.yaml)
 
@@ -93,8 +93,36 @@ When you want to enable the inbuilt text_sensors enable this, it will output use
 
 [waterpump.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/common/waterpump.yaml)
 
-If you bought the optional Waterpump please enable this in the [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml)
+If you have the optional pump, explicitly uncomment its package in [LILYGO-T-Higrow-ESP32.yaml](https://github.com/bruvv/LILYGO-T-Higrow-Esphome/blob/main/LILYGO-T-Higrow-ESP32.yaml). Automatic watering always starts disabled and requires a safe pump driver and independent physical leak protection.
 
 # Customizations
 
 If you successfully created a customization, please contribute this with a [pull request], ideally with an example configuration.
+
+## Safety, accuracy and power profiles (2026)
+
+### Soil readings
+
+The soil moisture and **fertilizer index** are *relative* percentages, not lab-grade measurements. The fertilizer index is not an electrical conductivity value in µS/cm. The BH1750 component already measures lux; the default correction factor is `1.0`.
+
+To calibrate an individual probe, override the substitutions from your adopted device configuration and briefly set `calibration_mode: true`. Record dry and wet **voltages**, then set `moisture_min` (dry voltage), `moisture_max` (wet voltage), `conductivity_min` and `conductivity_max`, and restore `calibration_mode: false`. The base configuration does not need to be edited or forked. Do not submerge the electronics, and do not treat the fertilizer index as an EC standard.
+
+### Water pump
+
+The pump is not part of the default build. If you opt in, a dedicated Home Assistant switch enables automatic watering, **disabled after every reboot**. A cycle is at most `5s`, followed by a `6h` cooldown. Only a fresh, valid soil reading below `20%` can trigger the pump; measurements above `40%` or invalid measurements stop it. These thresholds and times are substitutions. Provide a correctly rated pump driver, flyback protection, external power and a physical overflow/leak safeguard. The software is *not* an independent water safety mechanism.
+
+### Battery and deep sleep
+
+Enable both `battery.yaml` and `deepsleep.yaml` packages and set `update_interval: 10s` in your adopted configuration. Remove the Bluetooth proxy, tracker and their API scan hooks. The deep-sleep script forces fresh soil ADC samples on each wake, waits for the native API with a timeout, then returns to deep sleep. The maximum awake time defaults to `90s`; the nominal sleep interval is `60min`. Battery percentage is only a piecewise voltage estimate, not measured state of charge.
+
+Example configurations for the battery, BME280, pump, and calibration options are in [tests](tests). They are compile-tested in CI.
+
+### API security and local overrides
+
+The shared web installer intentionally contains **no shared passwords or encryption keys**. It uses USB Improv for initial Wi-Fi provisioning and no longer advertises an unsecured fallback hotspot. Once adopted, use [examples/secure-home.yaml](examples/secure-home.yaml) as a reference for unique local API encryption, Wi-Fi credentials and an optional password-protected recovery AP. Keep values in your personal `secrets.yaml`, not this repository. A change to the API key must also be applied in Home Assistant.
+
+To customize an installed device without forking, use a remote [ESPHome package](https://esphome.io/components/packages/) in your local device configuration, override its `substitutions`, and use `!extend` or `!remove` to modify packaged entities. For example, `sensor: [{id: !remove higrow_dht}]` removes the default DHT component when using BME280.
+
+### Compatibility
+
+The shared firmware targets ESPHome **2026.10.1**; CI compiles the default firmware and four optional profiles using that same version, with a non-blocking beta check. Release builds use the same pinned version. Physical verification of sensor calibration, pump electrical behavior and battery endurance remains hardware-specific.

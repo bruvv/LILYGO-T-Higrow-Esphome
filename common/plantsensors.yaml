@@ -1,55 +1,62 @@
 ---
 sensor:
-  # Soil humidity %
+  # Capacitive soil moisture: dry voltage (moisture_min) -> 0%, wet
+  # voltage (moisture_max) -> 100%. Calibrate each probe.
   - platform: adc
     pin: GPIO32
     name: '${friendly_name} Soil Moisture'
     id: ${devicename}_moisture
-    icon: 'mdi:watering-can'
+    icon: mdi:watering-can
     update_interval: ${update_interval}
-    attenuation: 11db
-    accuracy_decimals: '${ 5 if calibration_mode else 2 }'
-    unit_of_measurement: '${ "V" if calibration_mode else "%" }'
-    device_class: 'moisture'
-    state_class: 'measurement'
-    # unit_of_measurement: "V" # uncomment for calibration
-    filters: # comment when calibrating
-      - calibrate_linear: # comment when calibrating
-          # Map 0.0 (from sensor) to 0.0 (true value)
-          - ${0.0 if calibration_mode else moisture_min} -> 0.0 # comment when calibrating
-          - ${100.0 if calibration_mode else moisture_max} -> 100.0 # comment when calibrating
-
-  # Fertilizer sensor
-  - platform: adc
-    pin: GPIO34
-    name: '${friendly_name} Soil Conductivity'
-    id: '${devicename}_soil_conductivity'
-    icon: 'mdi:flower'
-    update_interval: ${update_interval}
-    attenuation: 11db
-    accuracy_decimals: '${ 5 if calibration_mode else 2 }'
-    unit_of_measurement: '${ "V" if calibration_mode else "µS/cm" }'
-    # device_class: '' # for now home assistant does not support this class
-    state_class: 'measurement'
+    attenuation: 12db
+    samples: 16
+    sampling_mode: avg
+    accuracy_decimals: '${5 if calibration_mode else 2}'
+    unit_of_measurement: '${"V" if calibration_mode else "%"}'
+    device_class: '${"voltage" if calibration_mode else "moisture"}'
+    state_class: measurement
     filters:
       - calibrate_linear:
-          # Map 0.0 (from sensor) to 0.0 (true value)
+          - ${0.0 if calibration_mode else moisture_min} -> 0.0
+          - ${100.0 if calibration_mode else moisture_max} -> 100.0
+      # Preserve invalid values: a NaN must never trigger watering.
+      - lambda: |-
+          if (!std::isfinite(x)) return NAN;
+          return fmaxf(0.0f, fminf(100.0f, x));
+
+  # This is a relative fertilizer INDEX, not a calibrated EC measurement.
+  # Do not label it as µS/cm without a validated conductivity calibration.
+  - platform: adc
+    pin: GPIO34
+    name: '${friendly_name} Soil Fertilizer Index'
+    id: '${devicename}_soil_conductivity'
+    icon: mdi:flower
+    update_interval: ${update_interval}
+    attenuation: 12db
+    samples: 16
+    sampling_mode: avg
+    accuracy_decimals: '${5 if calibration_mode else 2}'
+    unit_of_measurement: '${"V" if calibration_mode else "%"}'
+    state_class: measurement
+    filters:
+      - calibrate_linear:
           - ${0.0 if calibration_mode else conductivity_min} -> 0.0
           - ${100.0 if calibration_mode else conductivity_max} -> 100.0
+      - lambda: |-
+          if (!std::isfinite(x)) return NAN;
+          return fmaxf(0.0f, fminf(100.0f, x));
 
-  # Lux sensor
+  # BH1750 driver already reports lux. Never multiply by 200 by default.
   - platform: bh1750
     i2c_id: bus_a
     name: '${friendly_name} BH1750 Illuminance'
     id: '${devicename}_bh1750_illuminance'
     address: 0x23
-    unit_of_measurement: 'lx'
-    icon: 'mdi:white-balance-sunny'
-    device_class: 'illuminance'
-    state_class: 'measurement'
+    unit_of_measurement: lx
+    icon: mdi:white-balance-sunny
+    device_class: illuminance
+    state_class: measurement
     setup_priority: -300
     update_interval: ${update_interval}
-    # convert to illuminance
     filters:
-      - lambda: |-
-          return x * 200.0;
+      - multiply: ${bh1750_correction_factor}
