@@ -1,4 +1,4 @@
-name: ESPHome validation
+name: Test PR
 
 on:
   pull_request:
