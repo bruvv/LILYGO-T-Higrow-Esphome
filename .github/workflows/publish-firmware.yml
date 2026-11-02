@@ -36,3 +36,17 @@ jobs:
       - build-firmware
     with:
       version: ${{ inputs.release_tag || github.event.release.tag_name }}
+
+  deploy-installer-after-dispatch:
+    name: Request web installer deployment
+    if: github.event_name == 'workflow_dispatch'
+    needs: [upload-to-release]
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Dispatch GitHub Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run publish-pages.yml --ref main
