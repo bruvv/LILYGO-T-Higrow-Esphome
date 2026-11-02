@@ -22,5 +22,6 @@ esphome:
                   return id(${devicename}_moisture).has_state()
                     && id(${devicename}_soil_conductivity).has_state();
           timeout: 60s
-      - delay: 3s
+      # Allow 10s poll-cycle DHT/BH1750 updates to reach Home Assistant.
+      - delay: 15s
       - deep_sleep.enter: deep_sleep_control

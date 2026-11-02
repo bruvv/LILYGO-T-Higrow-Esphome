@@ -4,7 +4,7 @@ substitutions:
   devicename: "lilygohigrowplantsensor"
   friendly_name: "Plant Sensor"
   device_description: "Keep my plants safe and lively"
-  project_version: "1.7.0-dev"
+  project_version: "1.7.0"
   update_interval: 30min # Set this to e.g. 1min when calibrating
   loglevel: INFO
   moisture_min: "2.82"
