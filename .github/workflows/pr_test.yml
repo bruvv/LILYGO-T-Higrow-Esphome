@@ -23,7 +23,7 @@ jobs:
           config_file: .github/yamllint.yml
 
   build:
-    name: "${{ matrix.file }} / ${{ matrix.esphome-version }}"
+    name: "${{ matrix.check_name }}"
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.esphome-version == 'beta' }}
     strategy:
@@ -33,16 +33,22 @@ jobs:
         include:
           - file: LILYGO-T-Higrow-ESP32.yaml
             esphome-version: 2026.10.1
+            check_name: "Test Building LILYGO-T-Higrow-ESP32.yaml"
           - file: tests/bme280.yaml
             esphome-version: 2026.10.1
+            check_name: "Test Building BME280 profile"
           - file: tests/battery.yaml
             esphome-version: 2026.10.1
+            check_name: "Test Building Battery profile"
           - file: tests/calibration.yaml
             esphome-version: 2026.10.1
+            check_name: "Test Building Calibration profile"
           - file: tests/waterpump.yaml
             esphome-version: 2026.10.1
+            check_name: "Test Building Waterpump profile"
           - file: LILYGO-T-Higrow-ESP32.yaml
             esphome-version: beta
+            check_name: "Test Building LILYGO-T-Higrow-ESP32.yaml (beta)"
     steps:
       - uses: actions/checkout@v7
       - uses: esphome/build-action@v8.1.0
