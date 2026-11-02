@@ -22,7 +22,41 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Verify source project version
-        run: grep -Eq '^  project_version: "1[.]7[.]0"$' LILYGO-T-Higrow-ESP32.yaml
+        run: |
+          grep -Eq '^  project_version: "1[.]7[.]0"
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.7.0 > /dev/null 2>&1; then
+            echo 'v1.7.0 release already exists'
+          else
+            cat > "$RUNNER_TEMP/RELEASE_NOTES.md" <<'RELEASE_NOTES'
+            ## LILYGO T-HiGrow ESPHome v1.7.0
+
+            - Correct BH1750 lux conversion and report the soil fertilizer metric as a relative index rather than an uncalibrated conductivity value.
+            - Improve ADC sampling, battery state estimates and deep sleep behavior.
+            - Make automatic watering opt-in with a bounded runtime and cooldown.
+            - Improve Bluetooth scan behavior and provisioning security.
+            - Update ESPHome to 2026.10.1, improve firmware CI and fix Pages publishing.
+            - Document calibration, local overrides and optional hardware variants.
+
+            **Compatibility:** Automatic watering is no longer enabled by default. The old fertilizer value labeled µS/cm is now a relative percentage, so review affected Home Assistant dashboards and automations.
+
+            Firmware files are built and uploaded by the Build and publish workflow.
+            RELEASE_NOTES
+            gh release create v1.7.0 --target "$GITHUB_SHA" --title "v1.7.0" --notes-file "$RUNNER_TEMP/RELEASE_NOTES.md"
+          fi
+
+      - name: Build and upload firmware assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run publish-firmware.yml --ref main --raw-field release_tag=v1.7.0
+ LILYGO-T-Higrow-ESP32.yaml
 
       - name: Publish the GitHub release
         env:
