@@ -1,26 +1,57 @@
----
 name: Test PR
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    name: Test Building ${{ matrix.file }}
+  lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        file:
-          - LILYGO-T-Higrow-ESP32.yaml
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v7
-      - name: yaml-lint
-        uses: ibiqlik/action-yamllint@v3
+      - uses: actions/checkout@v7
+      - uses: ibiqlik/action-yamllint@v3
         with:
           config_file: .github/yamllint.yml
-      - name: Build ESPHome firmware to verify configuration
-        uses: esphome/build-action@v8.1.0
+
+  build:
+    name: "${{ matrix.check_name }}"
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.esphome-version == 'beta' }}
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        include:
+          - file: LILYGO-T-Higrow-ESP32.yaml
+            esphome-version: 2026.10.1
+            check_name: "Test Building LILYGO-T-Higrow-ESP32.yaml"
+          - file: tests/bme280.yaml
+            esphome-version: 2026.10.1
+            check_name: "Test Building BME280 profile"
+          - file: tests/battery.yaml
+            esphome-version: 2026.10.1
+            check_name: "Test Building Battery profile"
+          - file: tests/calibration.yaml
+            esphome-version: 2026.10.1
+            check_name: "Test Building Calibration profile"
+          - file: tests/waterpump.yaml
+            esphome-version: 2026.10.1
+            check_name: "Test Building Waterpump profile"
+          - file: LILYGO-T-Higrow-ESP32.yaml
+            esphome-version: beta
+            check_name: "Test Building LILYGO-T-Higrow-ESP32.yaml (beta)"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: esphome/build-action@v8.1.0
         with:
           yaml-file: ${{ matrix.file }}
+          version: ${{ matrix.esphome-version }}

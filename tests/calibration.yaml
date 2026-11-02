@@ -1,0 +1,7 @@
+---
+# CI variant: raw voltage readings for probe calibration.
+substitutions:
+  calibration_mode: true
+  update_interval: 10s
+packages:
+  base: !include ../LILYGO-T-Higrow-ESP32.yaml

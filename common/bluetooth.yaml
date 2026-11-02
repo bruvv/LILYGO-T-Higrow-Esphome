@@ -1,9 +1,25 @@
 ---
+# BLE proxy is intended for USB-powered devices. Disable for battery use.
+# Scan only when Home Assistant has a state-subscribing API connection.
 esp32_ble_tracker:
   scan_parameters:
-    interval: 1100ms # default 320ms
-    window: 1100ms # default 30ms
-    active: true
+    interval: 1100ms
+    window: 300ms
+    active: false
+    continuous: false
 
 bluetooth_proxy:
   active: true
+
+api:
+  on_client_connected:
+    - esp32_ble_tracker.start_scan:
+        continuous: true
+  on_client_disconnected:
+    - if:
+        condition:
+          not:
+            api.connected:
+              state_subscription_only: true
+        then:
+          - esp32_ble_tracker.stop_scan:

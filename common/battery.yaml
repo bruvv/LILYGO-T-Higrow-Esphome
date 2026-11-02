@@ -1,40 +1,44 @@
 ---
 sensor:
-  # Battery volt
+  # GPIO33 uses an approximately 1:2 voltage divider on supported boards.
   - platform: adc
-    pin:
-      number: 33
-      allow_other_uses: true
+    pin: GPIO33
     name: "${friendly_name} Battery Voltage"
     id: "${devicename}_voltage"
-    attenuation: 11db
-    unit_of_measurement: "V"
-    icon: "mdi:battery-high"
-    device_class: "voltage"
-    state_class: "measurement"
+    attenuation: 12db
+    samples: 16
+    sampling_mode: avg
+    unit_of_measurement: V
+    device_class: voltage
+    state_class: measurement
     accuracy_decimals: 2
+    entity_category: diagnostic
     filters:
-      - multiply: 2
-      - calibrate_linear:
-          # Map 0.0 (from sensor) to 0.0 (true value)
-          - 0.0 -> 0.0
-          - 4.0 -> 4.0
+      - multiply: 2.0
     update_interval: ${update_interval}
 
-  # Battery %
-  - platform: adc
-    pin:
-      number: 33
-      allow_other_uses: true
+  # One ADC input; a piecewise voltage estimate rather than another GPIO33 read.
+  # Voltage alone cannot measure Li-ion state of charge precisely under load.
+  - platform: copy
+    source_id: "${devicename}_voltage"
     name: "${friendly_name} Battery"
     id: "${devicename}_percent"
-    attenuation: 11db
-    accuracy_decimals: 2
+    device_class: battery
+    state_class: measurement
     unit_of_measurement: "%"
+    accuracy_decimals: 0
     filters:
-      - multiply: 2
       - calibrate_linear:
-          # Map 0.0 (from sensor) to 0.0 (true value)
-          - 3.18 -> 0.0
-          - 4.20 -> 100.0
-    update_interval: ${update_interval}
+          method: exact
+          datapoints:
+            - 3.20 -> 0.0
+            - 3.40 -> 10.0
+            - 3.60 -> 25.0
+            - 3.70 -> 40.0
+            - 3.80 -> 60.0
+            - 3.90 -> 75.0
+            - 4.00 -> 85.0
+            - 4.20 -> 100.0
+      - clamp:
+          min_value: 0
+          max_value: 100

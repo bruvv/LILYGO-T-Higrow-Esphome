@@ -1,22 +1,27 @@
 ---
+# Optional battery profile. Refresh ADC measurements every wake, then allow
+# time for the native API to send them before going back to sleep.
+# run_duration is a hard deadline if Wi-Fi/Home Assistant is unavailable.
 deep_sleep:
   id: deep_sleep_control
   run_duration: ${run_duration}
   sleep_duration: ${sleep_duration}
-  # wakeup_pin:
-  #   number: 35
-  #   inverted: true
-  #   allow_other_uses: true
-  #   mode:
-  #     input: true
-  #     pullup: true
 
-# Wake Button
-# binary_sensor:
-#   - platform: gpio
-#     name: '${devicename} Wake Button'
-#     pin:
-#       number: 35
-#       allow_other_uses: true
-#     internal: true
-#     setup_priority: 1000
+esphome:
+  on_boot:
+    priority: -100
+    then:
+      - delay: 2s
+      - component.update: ${devicename}_moisture
+      - component.update: ${devicename}_soil_conductivity
+      - wait_until:
+          condition:
+            and:
+              - api.connected:
+              - lambda: |-
+                  return id(${devicename}_moisture).has_state()
+                    && id(${devicename}_soil_conductivity).has_state();
+          timeout: 60s
+      # Allow 10s poll-cycle DHT/BH1750 updates to reach Home Assistant.
+      - delay: 15s
+      - deep_sleep.enter: deep_sleep_control

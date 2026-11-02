@@ -2,6 +2,7 @@
 sensor:
   # DHT
   - platform: dht
+    id: higrow_dht
     pin: 16
     # model: dht11
     temperature:
