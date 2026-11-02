@@ -2,7 +2,7 @@
 # Example for an ADOPTED device, not for the shared factory firmware.
 # Create local secrets.yaml with unique values; never commit them to Git.
 substitutions:
-  devicename: living-room-plant
+  devicename: living_room_plant
   friendly_name: Living Room Plant
 
 packages:
