@@ -4,6 +4,12 @@ name: Build and publish
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to build and upload firmware for
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -19,9 +25,9 @@ jobs:
       combined-name: lilgo-t-higrow-esp32
       #### Modify above here to match your project ####
 
-      release-summary: ${{ github.event.release.body }}
-      release-url: ${{ github.event.release.html_url }}
-      release-version: ${{ github.event.release.tag_name }}
+      release-summary: ${{ github.event.release.body || 'Firmware release' }}
+      release-url: ${{ github.event.release.html_url || format('https://github.com/{0}/releases/tag/{1}', github.repository, inputs.release_tag) }}
+      release-version: ${{ inputs.release_tag || github.event.release.tag_name }}
 
   upload-to-release:
     name: Upload to Release
@@ -29,4 +35,4 @@ jobs:
     needs:
       - build-firmware
     with:
-      version: ${{ github.event.release.tag_name }}
+      version: ${{ inputs.release_tag || github.event.release.tag_name }}

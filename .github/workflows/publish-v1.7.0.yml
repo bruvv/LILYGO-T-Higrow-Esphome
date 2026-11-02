@@ -1,0 +1,45 @@
+---
+name: Publish v1.7.0
+
+# Runs once on merge into main. GITHUB_TOKEN-generated release events do not
+# trigger other workflows, hence the explicit workflow_dispatch below.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v1.7.0.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  release:
+    name: Create release and request firmware build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v7
+
+      - name: Verify source version
+        run: |
+          grep -q 'project_version: "1.7.0"' LILYGO-T-Higrow-ESP32.yaml
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.7.0 >/dev/null 2>&1; then
+            echo "Release v1.7.0 already exists"
+          else
+            gh release create v1.7.0 --target "$GITHUB_SHA" --title "v1.7.0" --notes "Updates from PR #77: corrected lux and soil fertilizer readings, battery and Bluetooth improvements, optional safe watering, ESPHome 2026.10.1, security guidance, and improved CI. NOTE: the fertilizer reading is now a relative percentage rather than an uncalibrated conductivity value. Firmware binaries are built and attached by the Build and publish workflow."
+          fi
+
+      - name: Dispatch firmware build and release asset upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh workflow run publish-firmware.yml --ref main --raw-field release_tag=v1.7.0
